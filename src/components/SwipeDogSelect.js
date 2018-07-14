@@ -15,7 +15,7 @@ class SwipeDogSelect extends Component {
             }
             return breedString.slice(0, -2);      
         } 
-        return breed.$t;   
+        return breed.$t; 
     }
 
     render() {
