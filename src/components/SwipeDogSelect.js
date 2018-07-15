@@ -22,7 +22,7 @@ class SwipeDogSelect extends Component {
 
     renderDeckSwiper() {
         if (this.props.findingDogs) {
-            return (<Spinner />);
+            return (<Spinner color='black' />);
         } else if (this.props.dogs === undefined) {
             return (
                 <Text>No dogs found</Text>
