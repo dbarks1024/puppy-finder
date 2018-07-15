@@ -21,13 +21,13 @@ class SwipeDogSelect extends Component {
     }
 
     renderDeckSwiper() {
-        if (this.props.dogs === undefined) {
+        if (this.props.findingDogs) {
+            return (<Spinner />);
+        } else if (this.props.dogs === undefined) {
             return (
                 <Text>No dogs found</Text>
             );   
-        } else if (this.props.findingDogs) {
-            return (<Spinner />);
-        }
+        } 
         return (
             <DeckSwiper 
             dataSource={this.props.dogs} 
