@@ -3,9 +3,14 @@ import { connect } from 'react-redux';
 import { Image } from 'react-native';
 import { Container, View, DeckSwiper, Card, 
     CardItem, Thumbnail, Text, Left, Body, Icon } from 'native-base';
+import { findDogs } from '../actions';
 
 
 class SwipeDogSelect extends Component {
+
+    componentWillMount() {
+        this.props.findDogs();   
+    }
 
     dogBreedString(breed) {
         if (Array.isArray(breed)) {
@@ -58,4 +63,4 @@ const mapStateToProps = state => {
     return { dogs: state.dogs.petfinder.pets.pet };
 };
 
-export default connect(mapStateToProps)(SwipeDogSelect);
+export default connect(mapStateToProps, { findDogs })(SwipeDogSelect);
