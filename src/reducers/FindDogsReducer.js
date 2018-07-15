@@ -1,13 +1,15 @@
+import { FOUND_DOGS } from '../actions/types';
+
 const INITIAL_STATE = {
-    test: '',
+    dogs: '',
 };
 
 export default (state = INITIAL_STATE, action) => {
     console.log(action);
     switch (action.type) {
-        case 'test':
+        case FOUND_DOGS:
             return { ...state,
-                test: action.payload
+                dogs: action.payload
             };
         default:
             return state;
