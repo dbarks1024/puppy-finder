@@ -1,3 +1,3 @@
 import data from './dogs.json';
 
-export default () => data;
+export default () => data.petfinder.pets;

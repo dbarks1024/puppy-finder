@@ -9,20 +9,20 @@ const SwipeDogItem = ({ dog, breed }) => {
         <Left>
             <Thumbnail source={{ uri: dog.media.photos.photo[3].$t }} />
             <Body>
-            <Text>{dog.name.$t}</Text>
-            <Text note> {breed} </Text>
+                <Text>{dog.name.$t}</Text>
+                <Text note> {breed} </Text>
             </Body>
         </Left>
         </CardItem>
         <CardItem cardBody>
-        <Image 
-        style={{ height: 300, flex: 1 }} 
-        source={{ uri: dog.media.photos.photo[3].$t }} 
-        />
+            <Image
+            style={{ height: 300, flex: 1 }} 
+            source={{ uri: dog.media.photos.photo[3].$t }} 
+            />
         </CardItem>
         <CardItem>
-        <Icon name="heart" style={{ color: '#ED4A6A' }} />
-        <Text>{dog.name.$t}</Text>
+            <Icon name="heart" style={{ color: '#ED4A6A' }} />
+            <Text>{dog.name.$t}</Text>
         </CardItem>
     </Card>
     );

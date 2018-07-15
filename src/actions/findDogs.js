@@ -1,23 +1,55 @@
+import {
+    FOUND_DOGS,
+    FINDING_DOGS
+} from './types';
+
 export const findDogs = () => {
+    const cardDetails = {
+        'key': '942708910a455c2a12f41399e343ffb3',
+        'location': 30189,
+        'format': 'json',
+    };
+
+    let formBody = [];
+    for (const property in cardDetails) { // eslint-disable-line
+        const encodedKey = encodeURIComponent(property);
+        const encodedValue = encodeURIComponent(cardDetails[property]);
+        formBody.push(`${encodedKey}=${encodedValue}`);
+    }
+    formBody = formBody.join("&");
+
     const options = {
-        method: 'POST',
+        method: 'post',
         headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
+            'Accept': 'application/json',
+            'Content-Type': 'application/x-www-form-urlencoded',
         },
-        body: JSON.stringify({
-            key: "942708910a455c2a12f41399e343ffb3",
-            format: "json",
-            location: "30189"
-        })
+        body: formBody
+
     };
     return (dispatch) => {
-        fetch('http://api.petfinder.com/pet.find', options)
-            .then((response) => console.log(response))
-            .then(() => {
+        dispatch({
+            type: FINDING_DOGS,
+            payload: true
+        });
+        fetch('http://api.petfinder.com/pet.find', options) // eslint-disable-line no-undef
+            .then((response) => response.json())
+            .then((response) => {
                 dispatch({
-                    type: 'test'
+                    type: FINDING_DOGS,
+                    payload: false
+                });
+                dispatch({
+                    type: FOUND_DOGS,
+                    payload: response.petfinder.pets
                 });
             })
-            .catch((error) => console.log(error));
+            .catch((error) => {
+                console.log(`find dog error: ${error}`);
+                dispatch({
+                    type: FINDING_DOGS,
+                    payload: false
+                });
+            });
     };
 };

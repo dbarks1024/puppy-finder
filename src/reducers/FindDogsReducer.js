@@ -1,7 +1,8 @@
-import { FOUND_DOGS } from '../actions/types';
+import { FOUND_DOGS, FINDING_DOGS } from '../actions/types';
 
 const INITIAL_STATE = {
     dogs: '',
+    findingDogs: true
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -10,6 +11,10 @@ export default (state = INITIAL_STATE, action) => {
         case FOUND_DOGS:
             return { ...state,
                 dogs: action.payload
+            };
+        case FINDING_DOGS:
+            return { ...state,
+                findingDogs: action.payload
             };
         default:
             return state;

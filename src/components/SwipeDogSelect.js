@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Container, View, DeckSwiper } from 'native-base';
+import { Container, View, DeckSwiper, Text, Spinner } from 'native-base';
 import { findDogs } from '../actions';
 import SwipeDogItem from './SwipeDogItem';
-
 
 class SwipeDogSelect extends Component {
     componentWillMount() {
         this.props.findDogs();   
     }
-
+   
     dogBreedString(breed) {
         if (Array.isArray(breed)) {
             let breedString = '';
@@ -17,25 +16,39 @@ class SwipeDogSelect extends Component {
                 breedString += `${breed[i].$t}, `;
             }
             return breedString.slice(0, -2);      
-        } 
+        }
         return breed.$t; 
     }
 
+    renderDeckSwiper() {
+        if (this.props.dogs === undefined) {
+            return (
+                <Text>No dogs found</Text>
+            );   
+        } else if (this.props.findingDogs) {
+            return (<Spinner />);
+        }
+        return (
+            <DeckSwiper 
+            dataSource={this.props.dogs} 
+            renderItem={dog => {
+                return (
+                    <SwipeDogItem 
+                    dog={dog} 
+                    breed={this.dogBreedString(dog.breeds.breed)} 
+                    />
+                );
+            }}
+            />
+        );
+    }
+
     render() {
+        console.log(this.props.findingDogs);
         return (
             <Container>
                 <View>
-                    <DeckSwiper 
-                    dataSource={this.props.dogs} 
-                    renderItem={dog => {
-                        return (
-                            <SwipeDogItem 
-                            dog={dog} 
-                            breed={this.dogBreedString(dog.breeds.breed)} 
-                            />
-                        );
-                    }}
-                    />
+                    {this.renderDeckSwiper()}
                 </View>
             </Container>
         );
@@ -43,10 +56,10 @@ class SwipeDogSelect extends Component {
 }
 
 const mapStateToProps = state => {
-    if (state.dogs.petfinder.pets.pet === 'undefined') {
-        return { dogs: '' };
-    }
-    return { dogs: state.dogs.petfinder.pets.pet };
+    return { 
+        dogs: state.dogsReducer.dogs.pet, 
+        findingDogs: state.dogsReducer.findingDogs
+    };
 };
 
 export default connect(mapStateToProps, { findDogs })(SwipeDogSelect);
