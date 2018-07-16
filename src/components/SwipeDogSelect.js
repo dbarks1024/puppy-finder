@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Container, View, DeckSwiper, Text, Spinner } from 'native-base';
+import { Container, View, DeckSwiper, Text, Spinner, Button, Icon } from 'native-base';
 import { findDogs } from '../actions';
 import SwipeDogItem from './SwipeDogItem';
 
@@ -30,6 +30,7 @@ class SwipeDogSelect extends Component {
         } 
         return (
             <DeckSwiper 
+            ref={mr => (this._deckSwiper = mr)}
             dataSource={this.props.dogs} 
             renderItem={dog => {
                 return (
@@ -39,16 +40,38 @@ class SwipeDogSelect extends Component {
                     />
                 );
             }}
+            onSwipeRight={(dog) => { console.log(dog); }}
             />
         );
     }
-
+    
     render() {
         console.log(this.props.findingDogs);
         return (
             <Container>
                 <View>
                     {this.renderDeckSwiper()}
+                </View>
+                <View
+                style={{
+                    flexDirection: "row",
+                    flex: 1,
+                    position: "absolute",
+                    bottom: 50,
+                    left: 0,
+                    right: 0,
+                    justifyContent: "space-between",
+                    padding: 15
+                }}
+                >
+                    <Button iconLeft onPress={() => this._deckSwiper._root.swipeLeft(console.log(this))}>
+                        <Icon name="arrow-back" />
+                        <Text>Swipe Left</Text>
+                    </Button>
+                    <Button iconRight onPress={() => this._deckSwiper._root.swipeRight()}>
+                        <Text>Swipe Right</Text>
+                        <Icon name="arrow-forward" />
+                    </Button>
                 </View>
             </Container>
         );
