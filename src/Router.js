@@ -1,6 +1,9 @@
 import React from 'react';
-import { Scene, Router } from 'react-native-router-flux';
+import { Scene, Router, Actions } from 'react-native-router-flux';
 import SwipeDogSelect from './components/SwipeDogSelect';
+import Settings from './components/Settings';
+import BreedList from './components/settings/BreedList';
+
 
 const RouterComponent = () => {
     return (
@@ -10,8 +13,20 @@ const RouterComponent = () => {
                 key='swipeDogSelect' 
                 component={SwipeDogSelect} 
                 title='Pick Your Pup' 
-                initial
+                leftTitle='Settings'
+                onLeft={() => Actions.settings()}
                 /> 
+                <Scene
+                key='settings'
+                component={Settings}
+                title='Settings'
+                initial
+                />
+                <Scene 
+                key='breedList'
+                component={BreedList}
+                title='Breeds'
+                />
             </Scene>
         </Router>
     );
