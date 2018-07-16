@@ -8,6 +8,7 @@ export const findDogs = () => {
         'key': '942708910a455c2a12f41399e343ffb3',
         'location': 30189,
         'format': 'json',
+        'animal': 'dog'
     };
 
     let formBody = [];
