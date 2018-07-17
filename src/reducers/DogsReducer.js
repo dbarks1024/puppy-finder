@@ -9,12 +9,21 @@ const INITIAL_STATE = {
 };
 
 export default (state = INITIAL_STATE, action) => {
+    let breedString = '';
     switch (action.type) {
         case ADD_DOG:
+            if (Array.isArray(action.payload.breeds.breed)) {
+                for (let i = 0; i < action.payload.breeds.breed.length; i++) {
+                    breedString += `${action.payload.breeds.breed[i].$t}, `;
+                }
+            } else {
+                breedString = action.payload.breeds.breed.$t;
+            }
             state.myDogs.push({
                 name: action.payload.name.$t,
                 photo: action.payload.media.photos.photo[1].$t,
-                id: action.payload.id.$t
+                id: action.payload.id.$t,
+                breed: breedString.slice(0, -2)
             });
             return { ...state,
                 myDogs: state.myDogs

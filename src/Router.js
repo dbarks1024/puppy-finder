@@ -4,6 +4,7 @@ import { Scene, Router, Actions } from 'react-native-router-flux';
 import SwipeDogSelect from './components/SwipeDogSelect';
 import Settings from './components/Settings';
 import BreedList from './components/settings/BreedList';
+import MyDogs from './components/MyDogs';
 
 const TabIcon = ({ selected, title }) => {
     return (
@@ -21,6 +22,14 @@ const RouterComponent = () => {
                 tabs
                 tabBarStyle={{ backgroundColor: '#FFFFFF' }} 
                 >
+                    <Scene key="mydogs" title="My Dogs" icon={TabIcon} initial>
+                        <Scene
+                        key='myDogs'
+                        component={MyDogs}
+                        title='My Dogs'
+                        initial
+                        />
+                    </Scene>    
                     <Scene key="search" title="Search" icon={TabIcon}>
                         <Scene 
                         key='swipeDogSelect' 
@@ -28,9 +37,10 @@ const RouterComponent = () => {
                         title='Pick Your Pup' 
                         leftTitle='Settings'
                         onLeft={() => Actions.settings()}
+                        initial
                         /> 
                     </Scene>
-                    <Scene key="settings" title="Settings" icon={TabIcon}>
+                    <Scene key="settingsTab" title="Settings" icon={TabIcon}>
                         <Scene
                         key='settings'
                         component={Settings}

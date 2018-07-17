@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { FlatList } from 'react-native';
 import { connect } from 'react-redux';
-import { Container, Text, Left, List, ListItem, Thumbnail, Body, Content } from 'native-base';
+import { Container, Text, Icon, Left, Right, ListItem, Thumbnail, Body, Content } from 'native-base';
 import { removeDog, addDog } from '../actions';
 
 class MyDogs extends Component {
-    renderList() {
+renderList() {
         if (this.props.myDogs.lendth === 0) {
             return (
                 <Text>You have no saved dogs</Text>
@@ -15,16 +15,22 @@ class MyDogs extends Component {
             <FlatList 
             extraData={this.props.myDogs}
             data={this.props.myDogs}
-            renderItem={({ dog }) => {
+            renderItem={({ item }) => {
                 return (
                     <ListItem avatar>
                         <Left>
-                            <Thumbnail source={{ uri: dog.photo }} />
+                            <Thumbnail 
+                            source={{ uri: item.photo }} 
+                            square
+                            />
                         </Left>
                         <Body>
-                            <Text>{dog.name}</Text>
-                            <Text note>Breed</Text>
+                            <Text>{item.name}</Text>
+                            <Text note>{item.breed}</Text>
                         </Body>
+                        <Right>
+                            <Icon name='arrow-forward' />
+                        </Right>
                     </ListItem>
                 );
             }}
@@ -34,12 +40,11 @@ class MyDogs extends Component {
     }
 
     render() {
+        console.log(this.props.myDogs);
         return (
             <Container>
                 <Content>
-                    <List>  
-                        {this.renderList()}      
-                    </List>
+                    {this.renderList()}      
                 </Content>
             </Container>
         );
