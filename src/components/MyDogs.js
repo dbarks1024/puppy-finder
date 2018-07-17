@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
 import { FlatList } from 'react-native';
 import { connect } from 'react-redux';
+import { Actions } from 'react-native-router-flux';
 import { Container, Text, Icon, Left, Right, ListItem, Thumbnail, Body, Content } from 'native-base';
 import { removeDog, addDog } from '../actions';
 
 class MyDogs extends Component {
+onRowPress(dog) {
+    Actions.showDog({ dog });
+}
+
 renderList() {
         if (this.props.myDogs.lendth === 0) {
             return (
@@ -17,7 +22,11 @@ renderList() {
             data={this.props.myDogs}
             renderItem={({ item }) => {
                 return (
-                    <ListItem avatar>
+
+                    <ListItem 
+                    avatar
+                    onPress={() => this.onRowPress({ dog: item })}
+                    >
                         <Left>
                             <Thumbnail 
                             source={{ uri: item.photo }} 
@@ -40,7 +49,6 @@ renderList() {
     }
 
     render() {
-        console.log(this.props.myDogs);
         return (
             <Container>
                 <Content>

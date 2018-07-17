@@ -1,10 +1,12 @@
 import React from 'react';
 import { Text } from 'react-native';
 import { Scene, Router, Actions } from 'react-native-router-flux';
+import { Icon } from 'native-base';
 import SwipeDogSelect from './components/SwipeDogSelect';
 import Settings from './components/Settings';
 import BreedList from './components/settings/BreedList';
 import MyDogs from './components/MyDogs';
+import ShowDog from './components/ShowDog';
 
 const TabIcon = ({ selected, title }) => {
     return (
@@ -29,6 +31,11 @@ const RouterComponent = () => {
                         title='My Dogs'
                         initial
                         />
+                        <Scene
+                        key='showDog'
+                        component={ShowDog}
+                        title='My Dogs'
+                        />
                     </Scene>    
                     <Scene key="search" title="Search" icon={TabIcon}>
                         <Scene 
@@ -40,7 +47,7 @@ const RouterComponent = () => {
                         initial
                         /> 
                     </Scene>
-                    <Scene key="settingsTab" title="Settings" icon={TabIcon}>
+                    <Scene key="settingsTab" title="Settings" icon={() => <Icon name='settings' />}>
                         <Scene
                         key='settings'
                         component={Settings}
