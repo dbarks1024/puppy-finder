@@ -1,40 +1,54 @@
 import React, { Component } from 'react';
 import { Image } from 'react-native';
-import { Container, Content, Card, CardItem, Thumbnail, Text, Button, Icon, Left, Body } from 'native-base';
+import { Container, Content, Card, CardItem, Thumbnail, Text, Button, Icon, Left, Right, Body } from 'native-base';
 import { connect } from 'react-redux';
 import { removeDog, addDog, findDogById } from '../actions';
 
 class ShowDog extends Component {
-    componentWillMount() {
-        this.props.findDogById(this.props.dog.dog.id);
+    // componentWillMount() {
+    //     this.props.findDogById(this.props.dog.dog.id);
+    // }
+    renderStatus(status) {
+        if (status === 'A') {
+            return (
+                <Text>Adoptable</Text>
+            );
+        } 
+        return (
+            <Text>May be too late</Text>
+        );       
     }
+
     render() {
+        const { dog } = this.props.dog;
         return (
             <Container>           
                 <Content>
                     <Card style={{ flex: 0 }}>
                     <CardItem>
                         <Left>
-                        <Thumbnail source={{ uri: this.props.dog.dog.image }} />
+                        <Thumbnail source={{ uri: dog.photos[0].$t }} />
                         <Body>
-                            <Text>{this.props.dog.name}</Text>
-                            <Text note>{this.props.dog.dog.breed}</Text>
+                            <Text>{dog.name}</Text>
+                            <Text note>{dog.breed}</Text>
                         </Body>
                         </Left>
+                        <Right>
+                            {this.renderStatus(dog.status)}
+                        </Right>
                     </CardItem>
                     <CardItem>
                         <Body>
-                        <Image source={{ uri: this.props.dog.image }} style={{ height: 200, width: 200, flex: 1 }} />
+                        <Image source={{ uri: dog.photos[3].$t }} style={{ height: 350, width: 350, flex: 1 }} />
                         <Text>
-                            //Your text here
+                            {dog.description}
                         </Text>
                         </Body>
                     </CardItem>
                     <CardItem>
                         <Left>
-                        <Button transparent textStyle={{ color: '#87838B' }}>
-                            <Icon name="heart" />
-                            <Text>1,926 stars</Text>
+                        <Button danger textStyle={{ color: '#87838B' }}>
+                            <Text>Say Goodby</Text>
                         </Button>
                         </Left>
                     </CardItem>

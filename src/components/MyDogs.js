@@ -22,14 +22,13 @@ renderList() {
             data={this.props.myDogs}
             renderItem={({ item }) => {
                 return (
-
                     <ListItem 
                     avatar
                     onPress={() => this.onRowPress({ dog: item })}
                     >
                         <Left>
                             <Thumbnail 
-                            source={{ uri: item.photo }} 
+                            source={{ uri: item.photos[1].$t }} 
                             square
                             />
                         </Left>
