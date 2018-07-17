@@ -6,11 +6,11 @@ import BreedListItem from './BreedListItem';
 
 class BreedList extends Component {
     render() {
-        console.log(this.props.breeds);
         return (
             <Container>
                 <Content>
                     <FlatList 
+                    extraData={this.props.selectedBreeds}
                     data={this.props.breeds}
                     renderItem={({ item }) => <BreedListItem breed={item.$t} />}
                     keyExtractor={item => item.$t}
@@ -23,7 +23,8 @@ class BreedList extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        breeds: state.breeds.breed
+        breeds: state.breeds.breed,
+        selectedBreeds: state.settings.selectedBreeds
     };
 };
 

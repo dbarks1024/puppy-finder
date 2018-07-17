@@ -28,7 +28,6 @@ const RouterComponent = () => {
                         title='Pick Your Pup' 
                         leftTitle='Settings'
                         onLeft={() => Actions.settings()}
-                        initial
                         /> 
                     </Scene>
                     <Scene key="settings" title="Settings" icon={TabIcon}>
@@ -36,6 +35,7 @@ const RouterComponent = () => {
                         key='settings'
                         component={Settings}
                         title='Settings'
+                        initial
                         />
                         <Scene 
                         key='breedList'
