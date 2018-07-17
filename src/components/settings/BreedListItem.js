@@ -3,16 +3,14 @@ import { ListItem, CheckBox, Text, Body } from 'native-base';
 import { connect } from 'react-redux';
 import { updateBreeds } from '../../actions';
 
-class BreedList extends Component {
-    isChecked(breedArray, breedName, override) {
-        if (override === true) {
-            return true;
-        }
+class BreedListItem extends Component {
+    isChecked(breedArray, breedName) {
         if (breedArray.indexOf(breedName) === -1) {
             return false;
         } 
         return true;      
     }
+
 
     render() {
         const breedName = this.props.breed;
@@ -24,7 +22,7 @@ class BreedList extends Component {
                 color='blue' 
                 onPress={() => {
                     this.props.updateBreeds(breedName);
-                    console.log(CheckBox);
+                    this.forceUpdate();
                 }}
                 />
                 <Body>
@@ -35,10 +33,10 @@ class BreedList extends Component {
     }
 }
 
-// const mapStateToProps = state => {
-//     return { 
-//         selectedBreeds: state.settings.selectedBreeds
-//      };
-//   };
+const mapStateToProps = state => {
+    return { 
+        selectedBreeds: state.settings.selectedBreeds
+     };
+  };
 
-export default connect({}, { updateBreeds })(BreedList);
+export default connect(mapStateToProps, { updateBreeds })(BreedListItem);

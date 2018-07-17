@@ -6,7 +6,7 @@ import BreedListItem from './BreedListItem';
 
 class BreedList extends Component {
     render() {
-        return (
+        return (    
             <Container>
                 <Content>
                     <FlatList 
