@@ -5,6 +5,7 @@
         "max-len": 0,
         "quotes": 0,
         "no-underscore-dangle": 0,
-        "quote-props": 0
+        "quote-props": 0,
+        "import/no-extraneous-dependencies": 0
     }
 }
