@@ -16,7 +16,7 @@ const persistConfig = {
     key: 'root',
     storage,
     stateReconciler: autoMergeLevel2, // see "Merge Process" section for details.
-    blacklist: ['dogsReducer']
+    blacklist: ['findDogsReducer']
 };
 
 const pReducer = persistReducer(persistConfig, rootReducer);

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Container, View, DeckSwiper, Text, Spinner, Button, Icon } from 'native-base';
-import { findDogs } from '../actions';
+import { findDogs, addDog } from '../actions';
 import SwipeDogItem from './SwipeDogItem';
 
 class SwipeDogSelect extends Component {
@@ -40,13 +40,12 @@ class SwipeDogSelect extends Component {
                     />
                 );
             }}
-            onSwipeRight={(dog) => { console.log(dog); }}
+            onSwipeRight={(dog) => { this.props.addDog(dog); }}
             />
         );
     }
     
     render() {
-        console.log(this.props.findingDogs);
         return (
             <Container>
                 <View>
@@ -64,7 +63,7 @@ class SwipeDogSelect extends Component {
                     padding: 15
                 }}
                 >
-                    <Button iconLeft onPress={() => this._deckSwiper._root.swipeLeft(console.log(this))}>
+                    <Button iconLeft onPress={() => this._deckSwiper._root.swipeLeft()}>
                         <Icon name="arrow-back" />
                         <Text>Swipe Left</Text>
                     </Button>
@@ -80,9 +79,9 @@ class SwipeDogSelect extends Component {
 
 const mapStateToProps = state => {
     return { 
-        dogs: state.dogsReducer.dogs.pet, 
-        findingDogs: state.dogsReducer.findingDogs
+        dogs: state.findDogsReducer.dogs.pet, 
+        findingDogs: state.findDogsReducer.findingDogs
     };
 };
 
-export default connect(mapStateToProps, { findDogs })(SwipeDogSelect);
+export default connect(mapStateToProps, { findDogs, addDog })(SwipeDogSelect);

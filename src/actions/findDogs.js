@@ -4,31 +4,31 @@ import {
 } from './types';
 
 export const findDogs = () => {
-    const cardDetails = {
-        'key': '942708910a455c2a12f41399e343ffb3',
-        'location': 30189,
-        'format': 'json',
-        'animal': 'dog'
-    };
-
-    let formBody = [];
-    for (const property in cardDetails) { // eslint-disable-line
-        const encodedKey = encodeURIComponent(property);
-        const encodedValue = encodeURIComponent(cardDetails[property]);
-        formBody.push(`${encodedKey}=${encodedValue}`);
-    }
-    formBody = formBody.join("&");
-
-    const options = {
-        method: 'post',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: formBody
-
-    };
     return (dispatch) => {
+        const cardDetails = {
+            'key': '942708910a455c2a12f41399e343ffb3',
+            'location': 30189,
+            'format': 'json',
+            'animal': 'dog'
+        };
+    
+        let formBody = [];
+        for (const property in cardDetails) { // eslint-disable-line
+            const encodedKey = encodeURIComponent(property);
+            const encodedValue = encodeURIComponent(cardDetails[property]);
+            formBody.push(`${encodedKey}=${encodedValue}`);
+        }
+        formBody = formBody.join("&");
+    
+        const options = {
+            method: 'post',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: formBody
+    
+        };
         dispatch({
             type: FINDING_DOGS,
             payload: true
