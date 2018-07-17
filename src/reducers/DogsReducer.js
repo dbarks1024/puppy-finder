@@ -19,14 +19,19 @@ export default (state = INITIAL_STATE, action) => {
             } else {
                 breedString = action.payload.breeds.breed.$t;
             }
-            state.myDogs.push({
-                name: action.payload.name.$t,
-                photo: action.payload.media.photos.photo[1].$t,
-                id: action.payload.id.$t,
-                breed: breedString.slice(0, -2)
-            });
+            // state.myDogs.push({
+            //     name: action.payload.name.$t,
+            //     photo: action.payload.media.photos.photo[1].$t,
+            //     id: action.payload.id.$t,
+            //     breed: breedString.slice(0, -2)
+            //});
             return { ...state,
-                myDogs: state.myDogs
+                myDogs: [...state.myDogs, {
+                    name: action.payload.name.$t,
+                    photo: action.payload.media.photos.photo[1].$t,
+                    id: action.payload.id.$t,
+                    breed: breedString.slice(0, -2)
+                }]
             };
         case REMOVE_DOG:
             return {
