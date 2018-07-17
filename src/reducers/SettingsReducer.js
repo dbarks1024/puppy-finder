@@ -1,4 +1,4 @@
-import { UPDATE_BREEDS } from '../actions/types';
+import { UPDATE_BREEDS, ADD_ALL_BREEDS, CLEAR_BREEDS } from '../actions/types';
 
 const INITIAL_STATE = {
     selectedBreeds: []
@@ -7,7 +7,6 @@ const INITIAL_STATE = {
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case UPDATE_BREEDS:
-        console.log(action.payload);
             if (state.selectedBreeds.indexOf(action.payload) === -1) {
                 state.selectedBreeds.push(action.payload); 
             } else {
@@ -15,6 +14,15 @@ export default (state = INITIAL_STATE, action) => {
             }
             return { ...state,
                 selectedBreeds: state.selectedBreeds
+            };
+        case ADD_ALL_BREEDS:
+        console.log(action);
+            return { ...state,
+                selectedBreeds: action.payload
+            };
+        case CLEAR_BREEDS:
+            return { ...state,
+                selectedBreeds: []
             };
         default:
             return state;

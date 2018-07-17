@@ -11,7 +11,6 @@ class BreedListItem extends Component {
         return true;      
     }
 
-
     render() {
         const breedName = this.props.breed;
 
