@@ -37,7 +37,7 @@ const RouterComponent = () => {
                         title='My Dogs'
                         />
                     </Scene>    
-                    <Scene key="search" title="Search" icon={TabIcon} initial>
+                    <Scene key="search" title="Search" icon={() => <Icon name='search' />} initial>
                         <Scene 
                         key='swipeDogSelect' 
                         component={SwipeDogSelect} 
