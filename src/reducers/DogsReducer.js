@@ -19,6 +19,7 @@ export default (state = INITIAL_STATE, action) => {
                 breedString = action.payload.breeds.breed.$t;
             }
             return { ...state,
+                blacklist: [...state.blacklist, action.payload.id.$t],
                 myDogs: [...state.myDogs, {
                     name: action.payload.name.$t,
                     photos: action.payload.media.photos.photo,
@@ -43,6 +44,7 @@ export default (state = INITIAL_STATE, action) => {
                 })
             };
         case ADD_BLACKLIST:
+            console.log(state);
             return {
                 ...state, blacklist: [...state.blacklist, action.payload.$t]
             };
