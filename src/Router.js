@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text } from 'react-native';
-import { Scene, Router, Actions } from 'react-native-router-flux';
+import { Scene, Router } from 'react-native-router-flux';
 import { Icon } from 'native-base';
 import SwipeDogSelect from './components/SwipeDogSelect';
 import Settings from './components/Settings';

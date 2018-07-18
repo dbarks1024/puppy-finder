@@ -21,7 +21,6 @@ class SwipeDogSelect extends Component {
     }
 
     renderDeckSwiper() {
-        console.log(typeof this.props.dogs);
         if (this.props.findingDogs || typeof this.props.dogs === 'string') {
             return (<Spinner color='black' />);
         } else if (this.props.dogs === undefined) {

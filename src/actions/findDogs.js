@@ -9,13 +9,14 @@ export const findDogs = () => {
     return (dispatch, getState) => {
         const cardDetails = {
             'key': '942708910a455c2a12f41399e343ffb3',
-            'location': 30189,
+            'location': 99501,
             'format': 'json',
             'animal': 'dog',
             'count': 200,
-            'lastOffset': getState().findDogsReducer.lastOffset
+            'breed': 'Afghan Hound',
+            'lastOffset': getState().findDogsReducer.lastOffset,
         };
-    
+       
         let formBody = [];
         for (const property in cardDetails) { // eslint-disable-line
             const encodedKey = encodeURIComponent(property);
@@ -40,6 +41,10 @@ export const findDogs = () => {
         fetch('http://api.petfinder.com/pet.find', options) // eslint-disable-line no-undef
             .then((response) => response.json())
             .then((response) => {
+                console.log(response);
+                return response;
+            })
+            .then((response) => {
                 //send last offset
                 dispatch({
                     type: LAST_OFFSET,
@@ -49,20 +54,26 @@ export const findDogs = () => {
             })
             .then((response) => {
                 const filteredPets = response.petfinder.pets.pet.filter((pet) => {
-                    return getState().dogs.blacklist.indexOf(pet.id.$t) === -1;
+                    console.log(pet.media);
+                    return getState().dogs.blacklist.indexOf(pet.id.$t) === -1 &&
+                        pet.media.hasOwnProperty('photos');
                 });
                 return { ...response, petfinder: { pets: filteredPets } };
             })
             .then((response) => {
                 console.log(response);
-                dispatch({
-                    type: FINDING_DOGS,
-                    payload: false
-                });
-                dispatch({
-                    type: FOUND_DOGS,
-                    payload: response.petfinder.pets
-                });
+                if(response.petfinder.pets.length < 1) {
+                    findDogs();
+                    } else {
+                    dispatch({
+                        type: FINDING_DOGS,
+                        payload: false
+                    });
+                    dispatch({
+                        type: FOUND_DOGS,
+                        payload: response.petfinder.pets
+                    });
+                }
             })
             .catch((error) => {
                 console.log(`find dog error: ${error}`);
