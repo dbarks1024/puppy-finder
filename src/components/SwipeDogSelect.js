@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Container, View, DeckSwiper, Text, Spinner, Button, Icon } from 'native-base';
-import { findDogs, addDog } from '../actions';
+import { findDogs, addDog, blacklistDog } from '../actions';
 import SwipeDogItem from './SwipeDogItem';
 
 class SwipeDogSelect extends Component {
@@ -21,7 +21,8 @@ class SwipeDogSelect extends Component {
     }
 
     renderDeckSwiper() {
-        if (this.props.findingDogs) {
+        console.log(typeof this.props.dogs);
+        if (this.props.findingDogs || typeof this.props.dogs === 'string') {
             return (<Spinner color='black' />);
         } else if (this.props.dogs === undefined) {
             return (
@@ -41,6 +42,7 @@ class SwipeDogSelect extends Component {
                 );
             }}
             onSwipeRight={(dog) => { this.props.addDog(dog); }}
+            onSwipeLeft={(dog) => { this.props.blacklistDog(dog.id); }}
             />
         );
     }
@@ -79,9 +81,9 @@ class SwipeDogSelect extends Component {
 
 const mapStateToProps = state => {
     return { 
-        dogs: state.findDogsReducer.dogs.pet, 
+        dogs: state.findDogsReducer.dogs,
         findingDogs: state.findDogsReducer.findingDogs
     };
 };
 
-export default connect(mapStateToProps, { findDogs, addDog })(SwipeDogSelect);
+export default connect(mapStateToProps, { findDogs, addDog, blacklistDog })(SwipeDogSelect);

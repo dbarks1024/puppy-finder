@@ -6,3 +6,4 @@ export const CLEAR_BREEDS = 'clear_breeds';
 export const ADD_DOG = 'add_dog';
 export const REMOVE_DOG = 'remove_dog';
 export const SHOW_DOG = 'show_dog';
+export const ADD_BLACKLIST = 'addblack_list';

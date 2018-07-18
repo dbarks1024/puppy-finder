@@ -1,11 +1,8 @@
-import {
-    ADD_DOG,
-    REMOVE_DOG
-} from '../actions/types';
+import { ADD_DOG, REMOVE_DOG, ADD_BLACKLIST } from '../actions/types'; 
 
 const INITIAL_STATE = {
     myDogs: [],
-    rejectedDogs: []
+    blacklist: []
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -44,6 +41,10 @@ export default (state = INITIAL_STATE, action) => {
                  myDogs: state.myDogs.filter((dog) => {
                     return dog.id !== action.payload;
                 })
+            };
+        case ADD_BLACKLIST:
+            return {
+                ...state, blacklist: [...state.blacklist, action.payload.$t]
             };
         default:
             return state;

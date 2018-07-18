@@ -5,7 +5,7 @@ import {
 } from './types';
 
 export const findDogs = () => {
-    return (dispatch) => {
+    return (dispatch, getState) => {
         const cardDetails = {
             'key': '942708910a455c2a12f41399e343ffb3',
             'location': 30189,
@@ -37,6 +37,13 @@ export const findDogs = () => {
         fetch('http://api.petfinder.com/pet.find', options) // eslint-disable-line no-undef
             .then((response) => response.json())
             .then((response) => {
+                const filteredPets = response.petfinder.pets.pet.filter((pet) => {
+                    return getState().dogs.blacklist.indexOf(pet.id.$t) === -1;
+                });
+                return { ...response, petfinder: { pets: filteredPets } };
+            })
+            .then((response) => {
+                console.log(response);
                 dispatch({
                     type: FINDING_DOGS,
                     payload: false
@@ -78,7 +85,6 @@ export const findDogById = (id) => {
                 'Content-Type': 'application/x-www-form-urlencoded',
             },
             body: formBody
-    
         };
         dispatch({
             type: FINDING_DOGS,
@@ -94,7 +100,7 @@ export const findDogById = (id) => {
                 });
                 dispatch({
                     type: SHOW_DOG,
-                    payload: response.petfinder.pets
+                    payload: response.petfinder
                 });
             })
             .catch((error) => {

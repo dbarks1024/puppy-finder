@@ -24,7 +24,7 @@ const RouterComponent = () => {
                 tabs
                 tabBarStyle={{ backgroundColor: '#FFFFFF' }} 
                 >
-                    <Scene key="mydogs" title="My Dogs" icon={TabIcon} initial>
+                    <Scene key="mydogs" title="My Dogs" icon={TabIcon}>
                         <Scene
                         key='myDogs'
                         component={MyDogs}
@@ -37,7 +37,7 @@ const RouterComponent = () => {
                         title='My Dogs'
                         />
                     </Scene>    
-                    <Scene key="search" title="Search" icon={TabIcon}>
+                    <Scene key="search" title="Search" icon={TabIcon} initial>
                         <Scene 
                         key='swipeDogSelect' 
                         component={SwipeDogSelect} 
