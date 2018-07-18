@@ -42,8 +42,6 @@ const RouterComponent = () => {
                         key='swipeDogSelect' 
                         component={SwipeDogSelect} 
                         title='Pick Your Pup' 
-                        leftTitle='Settings'
-                        onLeft={() => Actions.settings()}
                         initial
                         /> 
                     </Scene>
