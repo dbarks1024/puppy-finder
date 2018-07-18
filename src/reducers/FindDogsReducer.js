@@ -2,7 +2,8 @@ import { FOUND_DOGS, FINDING_DOGS, SHOW_DOG } from '../actions/types';
 
 const INITIAL_STATE = {
     dogs: '',
-    findingDogs: true
+    findingDogs: true,
+    lastOffset: 0
 };
 
 export default (state = INITIAL_STATE, action) => {

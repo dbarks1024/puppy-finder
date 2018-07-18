@@ -1,7 +1,8 @@
 import {
     FOUND_DOGS,
     FINDING_DOGS,
-    SHOW_DOG
+    SHOW_DOG,
+    LAST_OFFSET
 } from './types';
 
 export const findDogs = () => {
@@ -10,7 +11,9 @@ export const findDogs = () => {
             'key': '942708910a455c2a12f41399e343ffb3',
             'location': 30189,
             'format': 'json',
-            'animal': 'dog'
+            'animal': 'dog',
+            'count': 200,
+            'lastOffset': getState().findDogsReducer.lastOffset
         };
     
         let formBody = [];
@@ -36,6 +39,14 @@ export const findDogs = () => {
         });
         fetch('http://api.petfinder.com/pet.find', options) // eslint-disable-line no-undef
             .then((response) => response.json())
+            .then((response) => {
+                //send last offset
+                dispatch({
+                    type: LAST_OFFSET,
+                    payload: response.petfinder.lastOffset.$t
+                });
+                return response;
+            })
             .then((response) => {
                 const filteredPets = response.petfinder.pets.pet.filter((pet) => {
                     return getState().dogs.blacklist.indexOf(pet.id.$t) === -1;
