@@ -1,4 +1,4 @@
-import { FOUND_DOGS, FINDING_DOGS, SHOW_DOG } from '../actions/types';
+import { FOUND_DOGS, FINDING_DOGS, SHOW_DOG, LAST_OFFSET } from '../actions/types';
 
 const INITIAL_STATE = {
     dogs: '',
@@ -13,12 +13,15 @@ export default (state = INITIAL_STATE, action) => {
                 dogs: action.payload
             };
         case FINDING_DOGS:
+        
             return { ...state,
                 findingDogs: action.payload
             };
         case SHOW_DOG:
         console.log(action.payload);
             return state;
+        case LAST_OFFSET:
+            return { ...state, lastOffset: action.payload };
         default:
             return state;
     }

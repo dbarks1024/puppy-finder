@@ -42,6 +42,7 @@ class SwipeDogSelect extends Component {
             }}
             onSwipeRight={(dog) => { this.props.addDog(dog); }}
             onSwipeLeft={(dog) => { this.props.blacklistDog(dog.id); }}
+            loop='false'
             />
         );
     }
