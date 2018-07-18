@@ -8,9 +8,9 @@ export const addDog = (dog) => {
     };
 };
 
-export const removeDog = (dog) => {
+export const removeDog = (id) => {
     return {
         type: REMOVE_DOG,
-        payload: dog
+        payload: id
     };
 };

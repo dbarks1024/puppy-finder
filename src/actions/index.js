@@ -1,3 +1,3 @@
 export * from './findDogs';
-export * from './swipeDogs';
+export * from './myDogs';
 export * from './settings';

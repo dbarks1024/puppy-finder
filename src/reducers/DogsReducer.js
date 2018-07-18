@@ -17,6 +17,7 @@ export default (state = INITIAL_STATE, action) => {
                 for (let i = 0; i < action.payload.breeds.breed.length; i++) {
                     breedString += `${action.payload.breeds.breed[i].$t}, `;
                 }
+                breedString.slice(0, -2);
             } else {
                 breedString = action.payload.breeds.breed.$t;
             }
@@ -25,7 +26,7 @@ export default (state = INITIAL_STATE, action) => {
                     name: action.payload.name.$t,
                     photos: action.payload.media.photos.photo,
                     id: action.payload.id.$t,
-                    breed: breedString.slice(0, -2),
+                    breed: breedString,
                     options: action.payload.options.option,
                     sex: action.payload.sex.$t,
                     shelterId: action.payload.shelterId.$t,
@@ -39,7 +40,10 @@ export default (state = INITIAL_STATE, action) => {
             };
         case REMOVE_DOG:
             return {
-                state
+                 ...state, 
+                 myDogs: state.myDogs.filter((dog) => {
+                    return dog.id !== action.payload;
+                })
             };
         default:
             return state;

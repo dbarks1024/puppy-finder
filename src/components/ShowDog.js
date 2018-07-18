@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Image } from 'react-native';
-import { Container, Content, Card, CardItem, Thumbnail, Text, Button, Icon, Left, Right, Body } from 'native-base';
+import { Container, Content, Card, CardItem, Thumbnail, Text, Button, Left, Right, Body } from 'native-base';
+import { Actions } from 'react-native-router-flux'; 
 import { connect } from 'react-redux';
 import { removeDog, addDog, findDogById } from '../actions';
 
@@ -47,7 +48,14 @@ class ShowDog extends Component {
                     </CardItem>
                     <CardItem>
                         <Left>
-                        <Button danger textStyle={{ color: '#87838B' }}>
+                        <Button
+                        onPress={() => {
+                            Actions.pop();
+                            this.props.removeDog(dog.id);
+                        }}
+                        danger 
+                        textStyle={{ color: '#87838B' }}
+                        >
                             <Text>Say Goodby</Text>
                         </Button>
                         </Left>
