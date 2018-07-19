@@ -57,16 +57,6 @@ export const findDogs = () => {
             .then((response) => {
                 //send last offset
                 console.log(response);
-                if(response.petfinder.pets.length < 1) {
-                    dispatch({
-                        type: FOUND_DOGS,
-                        payload: undefined
-                    });
-                    dispatch({
-                        type: FINDING_DOGS,
-                        payload: false
-                    });
-                }
                 dispatch({
                     type: FINDING_DOGS,
                     payload: false

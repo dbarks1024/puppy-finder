@@ -25,7 +25,7 @@ class SwipeDogSelect extends Component {
             return (<Spinner color='black' />);
         } else if (this.props.dogs === undefined) {
             return (
-                <Text>No dogs found. Try less filters.</Text>
+                <Text>No dogs found.</Text>
             );   
         } 
         return (
@@ -40,6 +40,7 @@ class SwipeDogSelect extends Component {
                     />
                 );
             }}
+            renderEmpty={() => <Text>No dogs found. Try less filters.</Text>}
             onSwipeRight={(dog) => { this.props.addDog(dog); }}
             onSwipeLeft={(dog) => { this.props.blacklistDog(dog.id); }}
             loop='false'
