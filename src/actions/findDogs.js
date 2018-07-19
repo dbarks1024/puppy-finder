@@ -17,6 +17,9 @@ export const findDogs = () => {
         if(getState().settings.size !== 'any') {
             cardDetails.size = getState().settings.size;
         }
+        if(getState().settings.gender !== 'either') {
+            cardDetails.sex = getState().settings.gender;
+        }
        
         let formBody = [];
         for (const property in cardDetails) { // eslint-disable-line
