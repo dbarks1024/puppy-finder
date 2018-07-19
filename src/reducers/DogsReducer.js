@@ -44,9 +44,9 @@ export default (state = INITIAL_STATE, action) => {
                 })
             };
         case ADD_BLACKLIST:
-            console.log(state);
+        console.log(action.payload);
             return {
-                ...state, blacklist: [...state.blacklist, action.payload.$t]
+                ...state, blacklist: [...state.blacklist, action.payload]
             };
         default:
             return state;

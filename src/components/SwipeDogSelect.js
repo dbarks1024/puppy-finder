@@ -42,7 +42,7 @@ class SwipeDogSelect extends Component {
             }}
             renderEmpty={() => <Text>No dogs found. Try less filters.</Text>}
             onSwipeRight={(dog) => { this.props.addDog(dog); }}
-            onSwipeLeft={(dog) => { this.props.blacklistDog(dog.id); }}
+            onSwipeLeft={(dog) => { this.props.blacklistDog(dog.id.$t); }}
             loop='false'
             />
         );
@@ -66,11 +66,25 @@ class SwipeDogSelect extends Component {
                     padding: 15
                 }}
                 >
-                    <Button iconLeft onPress={() => this._deckSwiper._root.swipeLeft()}>
+                    <Button 
+                    iconLeft 
+                    onPress={() => {
+                        this.props.blacklistDog(this._deckSwiper._root.state.selectedItem.id.$t);
+                        this._deckSwiper._root.swipeLeft();
+                    }}
+                    >
                         <Icon name="arrow-back" />
                         <Text>Swipe Left</Text>
                     </Button>
-                    <Button iconRight onPress={() => this._deckSwiper._root.swipeRight()}>
+                    <Button 
+                    iconRight 
+                    onPress={() => {
+                        this.props.addDog(this._deckSwiper._root.state.selectedItem);
+                        this._deckSwiper._root.swipeLeft();
+                        console.log(this._deckSwiper._root);
+                        }
+                    }
+                    >
                         <Text>Swipe Right</Text>
                         <Icon name="arrow-forward" />
                     </Button>

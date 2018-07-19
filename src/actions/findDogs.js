@@ -12,8 +12,7 @@ export const findDogs = () => {
             'location': 30189,
             'format': 'json',
             'animal': 'dog',
-            'count': 2,
-            'breed': 'Afghan Hound',
+            'count': 200,
             'lastOffset': getState().findDogsReducer.lastOffset,
         };
        
