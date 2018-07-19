@@ -1,26 +1,30 @@
 import React, { Component } from 'react';
 import { Actions } from 'react-native-router-flux';
-import { Container, Text, Content, Card, CardItem, Icon, Right } from 'native-base';
+import { Container, Text, Content, Left, ListItem, Icon, Right, List } from 'native-base';
 
 class Settings extends Component {
     render() {
         return (
             <Container>
                 <Content>
-                    <Card>
-                        <CardItem button onPress={() => Actions.breedList()}>
-                            <Text>Breeds</Text>
+                    <List>
+                        <ListItem button onPress={() => Actions.breedList()}>
+                            <Left>
+                                <Text>Breeds</Text>
+                            </Left>
                             <Right>
                                 <Icon name="arrow-forward" />
                             </Right>
-                        </CardItem>
-                        <CardItem button onPress={() => Actions.dogSize()}>
-                            <Text>Size</Text>
+                        </ListItem>
+                        <ListItem button onPress={() => Actions.dogSize()}>
+                            <Left>
+                                <Text>Size</Text>
+                            </Left>
                             <Right>
                                 <Icon name="arrow-forward" />
                             </Right>
-                        </CardItem>
-                    </Card>
+                        </ListItem>
+                    </List>
                 </Content>
             </Container>
         );
