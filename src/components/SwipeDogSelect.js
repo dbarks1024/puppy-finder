@@ -55,29 +55,25 @@ class SwipeDogSelect extends Component {
                     {this.renderDeckSwiper()}
                 </View>
                 <View
-                style={{
-                    flexDirection: "row",
-                    flex: 1,
-                    position: "absolute",
-                    bottom: 50,
-                    left: 0,
-                    right: 0,
-                    justifyContent: "space-between",
-                    padding: 15
-                }}
+                style={styles.buttonViewStyles}
                 >
                     <Button 
-                    iconLeft 
+                    style={styles.buttonsStyles}
+                    rounded
+                    large
                     onPress={() => {
                         this.props.blacklistDog(this._deckSwiper._root.state.selectedItem.id.$t);
                         this._deckSwiper._root.swipeLeft();
                     }}
                     >
-                        <Icon name="arrow-back" />
-                        <Text>Swipe Left</Text>
+                        <Icon style={styles.buttonIconStyles} name="close" fontSize='40' color='red' />
                     </Button>
                     <Button 
-                    iconRight 
+                    rounded
+                    style={styles.buttonsStyles}
+                    large
+                    danger
+                    color='red'
                     onPress={() => {
                         this.props.addDog(this._deckSwiper._root.state.selectedItem);
                         this._deckSwiper._root.swipeLeft();
@@ -85,14 +81,39 @@ class SwipeDogSelect extends Component {
                         }
                     }
                     >
-                        <Text>Swipe Right</Text>
-                        <Icon name="arrow-forward" />
+                        <Icon style={styles.buttonIconStyles} color='red' name="heart" active />
                     </Button>
                 </View>
             </Container>
         );
     }
 }
+
+const styles = {
+    buttonsStyles: {
+        borderWidth: 1,
+        borderColor: 'rgba(0,0,0,0.2)',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: 75,
+        height: 75,
+        borderRadius: 100,
+        marginTop: 100,
+    },
+    buttonViewStyles: {
+        flexDirection: "row",
+        flex: 1,
+        position: "absolute",
+        bottom: 15,
+        left: 15,
+        right: 15,
+        justifyContent: "space-between",
+        padding: 15
+    },
+    buttonIconStyles: {
+        fontSize: 45,
+    }
+};
 
 const mapStateToProps = state => {
     return { 
