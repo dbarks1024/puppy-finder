@@ -25,7 +25,7 @@ class SwipeDogSelect extends Component {
             return (<Spinner color='black' />);
         } else if (this.props.dogs === undefined) {
             return (
-                <Text>No dogs found</Text>
+                <Text>No dogs found. Try less filters.</Text>
             );   
         } 
         return (

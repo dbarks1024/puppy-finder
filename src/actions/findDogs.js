@@ -32,7 +32,6 @@ export const findDogs = () => {
                 'Content-Type': 'application/x-www-form-urlencoded',
             },
             body: formBody
-    
         };
         dispatch({
             type: FINDING_DOGS,
@@ -57,6 +56,17 @@ export const findDogs = () => {
             })
             .then((response) => {
                 //send last offset
+                console.log(response);
+                if(response.petfinder.pets.length < 1) {
+                    dispatch({
+                        type: FOUND_DOGS,
+                        payload: undefined
+                    });
+                    dispatch({
+                        type: FINDING_DOGS,
+                        payload: false
+                    });
+                }
                 dispatch({
                     type: FINDING_DOGS,
                     payload: false
