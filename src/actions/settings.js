@@ -1,4 +1,4 @@
-import { UPDATE_BREEDS, ADD_ALL_BREEDS, CLEAR_BREEDS, CHANGE_SIZE } from './types';
+import { UPDATE_BREEDS, ADD_ALL_BREEDS, CLEAR_BREEDS, CHANGE_SIZE, CHANGE_GENDER } from './types';
 
 export const updateBreeds = (breedName) => {
     return {
@@ -14,7 +14,6 @@ export const addAllBreeds = () => {
         for (let i = 0; i < breedsList.length; i++) {
            allBreeds.push(breedsList[i].$t); 
         }
-
         dispatch({
             type: ADD_ALL_BREEDS,
             payload: allBreeds
@@ -33,5 +32,12 @@ export const changeSize = (size) => {
     return {
         type: CHANGE_SIZE,
         payload: size
+    };
+};
+
+export const changeGender = (gender) => {
+    return {
+        type: CHANGE_GENDER,
+        payload: gender
     };
 };

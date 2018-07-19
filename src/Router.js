@@ -8,6 +8,7 @@ import BreedList from './components/settings/BreedList';
 import MyDogs from './components/MyDogs';
 import ShowDog from './components/ShowDog';
 import DogSize from './components/settings/DogSize';
+import DogGender from './components/settings/DogGender';
 
 const TabIcon = ({ selected, title }) => {
     return (
@@ -63,6 +64,11 @@ const RouterComponent = () => {
                         component={DogSize}
                         title='Size'
                         />   
+                        <Scene 
+                        key='dogGender'
+                        component={DogGender}
+                        title='Gender'
+                        /> 
                     </Scene>     
                 </Scene> 
             </Scene>

@@ -24,6 +24,14 @@ class Settings extends Component {
                                 <Icon name="arrow-forward" />
                             </Right>
                         </ListItem>
+                        <ListItem button onPress={() => Actions.dogGender()}>
+                            <Left>
+                                <Text>Gender</Text>
+                            </Left>
+                            <Right>
+                                <Icon name="arrow-forward" />
+                            </Right>
+                        </ListItem>
                     </List>
                 </Content>
             </Container>

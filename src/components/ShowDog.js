@@ -58,7 +58,7 @@ class ShowDog extends Component {
                                 <CardItem>
                                     <Body>
                                         <Text>
-                                            Sex: {dog.sex}
+                                            Gender: {dog.sex}
                                         </Text>
                                         <Text>
                                             Age: {dog.age}
