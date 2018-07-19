@@ -1,8 +1,9 @@
-import { UPDATE_BREEDS, ADD_ALL_BREEDS, CLEAR_BREEDS } from '../actions/types';
+import { UPDATE_BREEDS, ADD_ALL_BREEDS, CLEAR_BREEDS, CHANGE_SIZE } from '../actions/types';
 import { allBreeds } from './breeds';
 
 const INITIAL_STATE = {
-    selectedBreeds: allBreeds
+    selectedBreeds: allBreeds,
+    size: 'any'
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -25,6 +26,8 @@ export default (state = INITIAL_STATE, action) => {
             return { ...state,
                 selectedBreeds: []
             };
+        case CHANGE_SIZE:
+            return { ...state, size: action.payload };
         default:
             return state;
     }

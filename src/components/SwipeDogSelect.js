@@ -69,12 +69,13 @@ class SwipeDogSelect extends Component {
                         <Icon style={styles.buttonIconStyles} name="close" fontSize='40' color='red' />
                     </Button>
                     <Button
+                    warning
                     rounded
                     style={styles.buttonsStyles}
                     large
                     onPress={() => this.props.findDogs()}
                     >
-                        <Text>Refresh</Text>
+                        <Icon style={styles.buttonIconStyles} name='refresh' />
                     </Button>
                     <Button 
                     rounded

@@ -1,4 +1,4 @@
-import { UPDATE_BREEDS, ADD_ALL_BREEDS, CLEAR_BREEDS } from './types';
+import { UPDATE_BREEDS, ADD_ALL_BREEDS, CLEAR_BREEDS, CHANGE_SIZE } from './types';
 
 export const updateBreeds = (breedName) => {
     return {
@@ -26,5 +26,12 @@ export const clearAllBreeds = () => {
     return {
         type: CLEAR_BREEDS,
         payload: []
+    };
+};
+
+export const changeSize = (size) => {
+    return {
+        type: CHANGE_SIZE,
+        payload: size
     };
 };

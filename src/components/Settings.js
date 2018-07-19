@@ -14,6 +14,12 @@ class Settings extends Component {
                                 <Icon name="arrow-forward" />
                             </Right>
                         </CardItem>
+                        <CardItem button onPress={() => Actions.dogSize()}>
+                            <Text>Size</Text>
+                            <Right>
+                                <Icon name="arrow-forward" />
+                            </Right>
+                        </CardItem>
                     </Card>
                 </Content>
             </Container>

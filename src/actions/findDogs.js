@@ -7,13 +7,16 @@ import {
 export const findDogs = () => {
     return (dispatch, getState) => {
         const cardDetails = {
-            'key': '942708910a455c2a12f41399e343ffb3',
-            'location': 30189,
-            'format': 'json',
-            'animal': 'dog',
-            'count': 500,
-            'lastOffset': getState().findDogsReducer.lastOffset,
+            key: '942708910a455c2a12f41399e343ffb3',
+            location: 30189,
+            format: 'json',
+            animal: 'dog',
+            count: 500,
+            lastOffset: getState().findDogsReducer.lastOffset,
         };
+        if(getState().settings.size !== 'any') {
+            cardDetails.size = getState().settings.size;
+        }
        
         let formBody = [];
         for (const property in cardDetails) { // eslint-disable-line

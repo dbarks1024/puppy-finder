@@ -8,3 +8,4 @@ export const REMOVE_DOG = 'remove_dog';
 export const SHOW_DOG = 'show_dog';
 export const ADD_BLACKLIST = 'addblack_list';
 export const LAST_OFFSET = 'last_offset';
+export const CHANGE_SIZE = 'change_size';
