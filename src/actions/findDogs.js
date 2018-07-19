@@ -6,13 +6,12 @@ import {
 
 export const findDogs = () => {
     return (dispatch, getState) => {
-        console.log("find dogs");
         const cardDetails = {
             'key': '942708910a455c2a12f41399e343ffb3',
             'location': 30189,
             'format': 'json',
             'animal': 'dog',
-            'count': 200,
+            'count': 500,
             'lastOffset': getState().findDogsReducer.lastOffset,
         };
        
@@ -47,9 +46,14 @@ export const findDogs = () => {
                 return response;
             })
             .then((response) => {
+                const selectedBreeds = getState().settings.selectedBreeds;
+                console.log(selectedBreeds);
                 const filteredPets = response.petfinder.pets.pet.filter((pet) => {
+                    // not working
+                    const compareArray = Object.values(pet.breeds.breed).filter(val => !selectedBreeds.includes(val));                    
                     return getState().dogs.blacklist.indexOf(pet.id.$t) === -1 &&
-                            pet.media.hasOwnProperty('photos');
+                            pet.media.hasOwnProperty('photos') &&
+                            compareArray.length < 1; 
                 });
                 return { ...response, petfinder: { pets: filteredPets } };
             })
