@@ -1,7 +1,8 @@
 import { UPDATE_BREEDS, ADD_ALL_BREEDS, CLEAR_BREEDS } from '../actions/types';
+import { allBreeds } from './breeds';
 
 const INITIAL_STATE = {
-    selectedBreeds: []
+    selectedBreeds: allBreeds
 };
 
 export default (state = INITIAL_STATE, action) => {

@@ -12,8 +12,7 @@ export default (state = INITIAL_STATE, action) => {
             return { ...state,
                 dogs: action.payload
             };
-        case FINDING_DOGS:
-        
+        case FINDING_DOGS: 
             return { ...state,
                 findingDogs: action.payload
             };
