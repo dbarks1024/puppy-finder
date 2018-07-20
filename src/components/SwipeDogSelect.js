@@ -86,7 +86,6 @@ class SwipeDogSelect extends Component {
                     onPress={() => {
                         this.props.addDog(this._deckSwiper._root.state.selectedItem);
                         this._deckSwiper._root.swipeLeft();
-                        console.log(this._deckSwiper._root);
                         }
                     }
                     >

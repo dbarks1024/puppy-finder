@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Container, Content, Radio, Text, Left, Right, ListItem } from 'native-base';
-import { changeSize, changeGender } from '../../actions';
+import { changeGender } from '../../actions';
 
 class DogGender extends Component {
 
@@ -64,4 +64,4 @@ const mapStateToProps = (state) => {
     };
 };
 
-export default connect(mapStateToProps, { changeSize, changeGender })(DogGender);
+export default connect(mapStateToProps, { changeGender })(DogGender);
