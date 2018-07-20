@@ -8,11 +8,11 @@ export const findDogs = () => {
     return (dispatch, getState) => {
         const cardDetails = {
             key: '942708910a455c2a12f41399e343ffb3',
-            location: 30189,
+            location: getState().settings.location,
             format: 'json',
             animal: 'dog',
             count: 500,
-            lastOffset: getState().findDogsReducer.lastOffset,
+            offset: getState().findDogsReducer.lastOffset,
         };
         if(getState().settings.size !== 'any') {
             cardDetails.size = getState().settings.size;
@@ -28,7 +28,7 @@ export const findDogs = () => {
             formBody.push(`${encodedKey}=${encodedValue}`);
         }
         formBody = formBody.join("&");
-    
+
         const options = {
             method: 'post',
             headers: {
@@ -53,13 +53,16 @@ export const findDogs = () => {
             })
             .then((response) => {
                 const selectedBreeds = getState().settings.selectedBreeds;
-                console.log(selectedBreeds);
                 const filteredPets = response.petfinder.pets.pet.filter((pet) => {
-                    // not working
-                    const compareArray = Object.values(pet.breeds.breed).filter(val => !selectedBreeds.includes(val));                    
+                    //if all not all dob breeds selected
+                    if (selectedBreeds.length !== 248) {
+                        return getState().dogs.blacklist.indexOf(pet.id.$t) === -1 &&
+                                pet.media.hasOwnProperty('photos') &&
+                                Object.values(pet.breeds.breed).filter(val => !selectedBreeds.includes(val)).length < 1; 
+                            }      
+                    // if all dog breeds selected        
                     return getState().dogs.blacklist.indexOf(pet.id.$t) === -1 &&
-                            pet.media.hasOwnProperty('photos') &&
-                            compareArray.length < 1; 
+                            pet.media.hasOwnProperty('photos');
                 });
                 return { ...response, petfinder: { pets: filteredPets } };
             })

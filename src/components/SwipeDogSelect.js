@@ -40,10 +40,15 @@ class SwipeDogSelect extends Component {
                     />
                 );
             }}
-            renderEmpty={() => <Text>No dogs found. Try less filters.</Text>}
+            renderEmpty={() => {
+                if(this.props.findingDogs === false) {
+                this.props.findDogs();
+                }
+                return (<Text>No dogs found. Try less filters.</Text>);
+            }}
             onSwipeRight={(dog) => { this.props.addDog(dog); }}
             onSwipeLeft={(dog) => { this.props.blacklistDog(dog.id.$t); }}
-            loop='false'
+            loop={false}
             />
         );
     }
@@ -86,6 +91,7 @@ class SwipeDogSelect extends Component {
                     onPress={() => {
                         this.props.addDog(this._deckSwiper._root.state.selectedItem);
                         this._deckSwiper._root.swipeLeft();
+                        console.log(this._deckSwiper._root);
                         }
                     }
                     >

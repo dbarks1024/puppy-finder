@@ -5,7 +5,7 @@ const INITIAL_STATE = {
     selectedBreeds: allBreeds,
     size: 'any',
     gender: 'either',
-    location: ''
+    location: '30189'
 };
 
 export default (state = INITIAL_STATE, action) => {
