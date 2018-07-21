@@ -8,6 +8,13 @@ class SwipeDogSelect extends Component {
     componentWillMount() {
         this.props.findDogs();   
     }
+
+    shouldComponentUpdate(nextProps) {
+        if(nextProps.blacklist !== this.props.blacklist) {
+            return false;
+        } 
+        return true;
+    }
    
     dogBreedString(breed) {
         if (Array.isArray(breed)) {
@@ -20,7 +27,18 @@ class SwipeDogSelect extends Component {
         return breed.$t; 
     }
 
+    filterDogs() {
+        const { dogs, gender, selectedBreeds, blacklist, size } = this.props;
+        return dogs.filter((pet) => {
+            return blacklist.indexOf(pet.id.$t) === -1 &&
+                (selectedBreeds > 248 || Object.values(pet.breeds.breed).filter(val => !selectedBreeds.includes(val)).length < 1) &&
+                (gender === 'either' || pet.gender.$t === gender) &&
+                (size === 'any' || pet.size.$t === size);
+        });
+    }
+
     renderDeckSwiper() {
+        console.log(this.filterDogs());
         if (this.props.findingDogs || typeof this.props.dogs === 'string') {
             return (<Spinner color='black' />);
         } else if (this.props.dogs === undefined) {
@@ -31,7 +49,7 @@ class SwipeDogSelect extends Component {
         return (
             <DeckSwiper 
             ref={mr => (this._deckSwiper = mr)}
-            dataSource={this.props.dogs} 
+            dataSource={this.filterDogs()} 
             renderItem={dog => {
                 return (
                     <SwipeDogItem 
@@ -41,10 +59,7 @@ class SwipeDogSelect extends Component {
                 );
             }}
             renderEmpty={() => {
-                if(this.props.findingDogs === false) {
-                this.props.findDogs();
-                }
-                return (<Text>No dogs found. Try less filters.</Text>);
+                return (<Text>No dogs found. Try less filters or refreshing.</Text>);
             }}
             onSwipeRight={(dog) => { this.props.addDog(dog); }}
             onSwipeLeft={(dog) => { this.props.blacklistDog(dog.id.$t); }}
@@ -130,9 +145,16 @@ const styles = {
 };
 
 const mapStateToProps = state => {
+    const { selectedBreeds, gender, size } = state.settings;
+    const { dogs, findingDogs } = state.findDogsReducer;
+    const { blacklist } = state.dogs;
     return { 
-        dogs: state.findDogsReducer.dogs,
-        findingDogs: state.findDogsReducer.findingDogs
+        dogs,
+        findingDogs,
+        blacklist,
+        selectedBreeds,
+        gender,
+        size
     };
 };
 

@@ -1,8 +1,19 @@
 import {
     FOUND_DOGS,
     FINDING_DOGS,
-    LAST_OFFSET
+    LAST_OFFSET,
+    FILTER_DOGS
 } from './types';
+
+export const filterDogs = () => {
+    return (dispatch, getState) => {
+        dispatch({
+            type: FILTER_DOGS,
+            payload: getState().findDogsReducer.dogs
+        });
+    };
+};
+
 
 export const findDogs = () => {
     return (dispatch, getState) => {
@@ -52,19 +63,9 @@ export const findDogs = () => {
                 return response;
             })
             .then((response) => {
-                const selectedBreeds = getState().settings.selectedBreeds;
-                const filteredPets = response.petfinder.pets.pet.filter((pet) => {
-                    //if all not all dob breeds selected
-                    if (selectedBreeds.length !== 248) {
-                        return getState().dogs.blacklist.indexOf(pet.id.$t) === -1 &&
-                                pet.media.hasOwnProperty('photos') &&
-                                Object.values(pet.breeds.breed).filter(val => !selectedBreeds.includes(val)).length < 1; 
-                            }      
-                    // if all dog breeds selected        
-                    return getState().dogs.blacklist.indexOf(pet.id.$t) === -1 &&
-                            pet.media.hasOwnProperty('photos');
+                return response.petfinder.pets.pet.filter((pet) => {   
+                    return pet.media.hasOwnProperty('photos');
                 });
-                return { ...response, petfinder: { pets: filteredPets } };
             })
             .then((response) => {
                 //send last offset
@@ -75,7 +76,7 @@ export const findDogs = () => {
                 });
                 dispatch({
                     type: FOUND_DOGS,
-                    payload: response.petfinder.pets
+                    payload: response
                 });
             })
             .catch((error) => {
