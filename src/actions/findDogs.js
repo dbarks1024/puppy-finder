@@ -1,19 +1,8 @@
 import {
     FOUND_DOGS,
     FINDING_DOGS,
-    LAST_OFFSET,
-    FILTER_DOGS
+    LAST_OFFSET
 } from './types';
-
-export const filterDogs = () => {
-    return (dispatch, getState) => {
-        dispatch({
-            type: FILTER_DOGS,
-            payload: getState().findDogsReducer.dogs
-        });
-    };
-};
-
 
 export const findDogs = () => {
     return (dispatch, getState) => {
