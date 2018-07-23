@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Image } from 'react-native';
-import { Card, CardItem, Thumbnail, Text, Left, Body, Icon } from 'native-base';
+import { Card, CardItem, Thumbnail, Text, Left, Body } from 'native-base';
 
 class SwipeDogItem extends Component {
     
@@ -24,8 +24,7 @@ class SwipeDogItem extends Component {
                 />
             </CardItem>
             <CardItem>
-                <Icon name="heart" style={{ color: '#ED4A6A' }} />
-                <Text>{dog.name.$t}</Text>
+                <Text>{dog.age.$t}</Text>
             </CardItem>
         </Card>
         );

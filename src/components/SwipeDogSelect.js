@@ -39,7 +39,6 @@ class SwipeDogSelect extends Component {
     }
 
     renderDeckSwiper() {
-        console.log(this.props.dogs);
         if (this.props.findingDogs || typeof this.props.dogs === 'string') {
             return (<Spinner color='black' />);
         } else if (this.props.dogs === undefined) {
@@ -49,6 +48,8 @@ class SwipeDogSelect extends Component {
         } 
         return (
             <Swiper 
+            cardStyle={styles.swiperCardStyles}
+            stackSize={3}
             ref={swiper => { 
                 this.swiper = swiper; 
             }}
@@ -129,16 +130,16 @@ const styles = {
         borderColor: 'rgba(0,0,0,0.2)',
         alignItems: 'center',
         justifyContent: 'center',
-        width: 75,
-        height: 75,
-        borderRadius: 100,
+        width: 65,
+        height: 65,
+        borderRadius: 75,
         marginTop: 100,
     },
     buttonViewStyles: {
         flexDirection: "row",
         flex: 1,
         position: "absolute",
-        bottom: 15,
+        bottom: 10,
         left: 15,
         right: 15,
         justifyContent: "space-between",
@@ -146,6 +147,14 @@ const styles = {
     },
     buttonIconStyles: {
         fontSize: 45,
+    },
+    swiperCardStyles: { 
+        top: 5, 
+        left: 5, 
+        right: 5, 
+        flex: 1, 
+        width: '100%', 
+        height: 450 
     }
 };
 
