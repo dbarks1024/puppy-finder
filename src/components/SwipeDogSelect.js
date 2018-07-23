@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Container, View, DeckSwiper, Text, Spinner, Button, Icon } from 'native-base';
+import { Container, View, Text, Spinner, Button, Icon } from 'native-base';
+import Swiper from 'react-native-deck-swiper';
 import { findDogs, addDog, blacklistDog } from '../actions';
 import SwipeDogItem from './SwipeDogItem';
 
@@ -38,7 +39,7 @@ class SwipeDogSelect extends Component {
     }
 
     renderDeckSwiper() {
-        console.log(this.filterDogs());
+        console.log(this.props.dogs);
         if (this.props.findingDogs || typeof this.props.dogs === 'string') {
             return (<Spinner color='black' />);
         } else if (this.props.dogs === undefined) {
@@ -47,10 +48,12 @@ class SwipeDogSelect extends Component {
             );   
         } 
         return (
-            <DeckSwiper 
-            ref={mr => (this._deckSwiper = mr)}
-            dataSource={this.filterDogs()} 
-            renderItem={dog => {
+            <Swiper 
+            ref={swiper => { 
+                this.swiper = swiper; 
+            }}
+            cards={this.filterDogs()} 
+            renderCard={dog => {
                 return (
                     <SwipeDogItem 
                     dog={dog} 
@@ -58,17 +61,20 @@ class SwipeDogSelect extends Component {
                     />
                 );
             }}
-            renderEmpty={() => {
-                return (<Text>No dogs found. Try less filters or refreshing.</Text>);
-            }}
-            onSwipeRight={(dog) => { this.props.addDog(dog); }}
-            onSwipeLeft={(dog) => { this.props.blacklistDog(dog.id.$t); }}
-            loop={false}
+            // renderEmpty={() => {
+            //     return (<Text>No dogs found. Try less filters or refreshing.</Text>);
+            // }}
+            onSwipedRight={(index) => this.props.addDog(this.swiper.state.cards[index])}
+            onSwipedLeft={(index) => this.props.blacklistDog(this.swiper.state.cards[index].id.$t)}
+            disableBottomSwipe	
+            disableTopSwipe
+            //loop={false}
             />
         );
     }
     
     render() {
+        console.log(this.swiper);
         return (
             <Container>
                 <View>
@@ -82,8 +88,8 @@ class SwipeDogSelect extends Component {
                     rounded
                     large
                     onPress={() => {
-                        this.props.blacklistDog(this._deckSwiper._root.state.selectedItem.id.$t);
-                        this._deckSwiper._root.swipeLeft();
+                       // this.props.blacklistDog(this.swiper._root.state.selectedItem.id.$t);
+                        this.swiper.swipeLeft();
                     }}
                     >
                         <Icon style={styles.buttonIconStyles} name="close" fontSize='40' color='red' />
@@ -104,9 +110,8 @@ class SwipeDogSelect extends Component {
                     danger
                     color='red'
                     onPress={() => {
-                        this.props.addDog(this._deckSwiper._root.state.selectedItem);
-                        this._deckSwiper._root.swipeLeft();
-                        console.log(this._deckSwiper._root);
+                       // this.props.addDog(this._deckSwiper._root.state.selectedItem);
+                        this.swiper.swipeRight();
                         }
                     }
                     >
