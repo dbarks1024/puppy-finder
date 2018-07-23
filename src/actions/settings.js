@@ -1,4 +1,4 @@
-import { UPDATE_BREEDS, ADD_ALL_BREEDS, CLEAR_BREEDS, CHANGE_SIZE, CHANGE_GENDER } from './types';
+import { UPDATE_BREEDS, ADD_ALL_BREEDS, CLEAR_BREEDS, CHANGE_SIZE, CHANGE_GENDER, CHANGE_LOCATION } from './types';
 
 export const updateBreeds = (breedName) => {
     return {
@@ -39,5 +39,12 @@ export const changeGender = (gender) => {
     return {
         type: CHANGE_GENDER,
         payload: gender
+    };
+};
+
+export const changeLocation = (zip) => {
+    return {
+        type: CHANGE_LOCATION,
+        payload: zip
     };
 };

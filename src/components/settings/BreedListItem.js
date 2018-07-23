@@ -18,7 +18,6 @@ class BreedListItem extends Component {
             <ListItem>
                 <CheckBox 
                 checked={this.isChecked(this.props.selectedBreeds, breedName)}
-                color='blue' 
                 onPress={() => {
                     this.props.updateBreeds(breedName);
                     this.forceUpdate();

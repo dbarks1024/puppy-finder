@@ -7,7 +7,7 @@ class Settings extends Component {
         return (
             <Container>
                 <Content>
-                    <List>
+                    <List >
                         <ListItem button onPress={() => Actions.breedList()}>
                             <Left>
                                 <Text>Breeds</Text>
@@ -27,6 +27,14 @@ class Settings extends Component {
                         <ListItem button onPress={() => Actions.dogGender()}>
                             <Left>
                                 <Text>Gender</Text>
+                            </Left>
+                            <Right>
+                                <Icon name="arrow-forward" />
+                            </Right>
+                        </ListItem>
+                        <ListItem button onPress={() => Actions.location()}>
+                            <Left>
+                                <Text>Location</Text>
                             </Left>
                             <Right>
                                 <Icon name="arrow-forward" />
