@@ -10,7 +10,7 @@ export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case FOUND_DOGS:
             return { ...state,
-                dogs: [...state.dogs, ...action.payload]
+                dogs: action.payload
             };
         case FINDING_DOGS: 
             return { ...state,

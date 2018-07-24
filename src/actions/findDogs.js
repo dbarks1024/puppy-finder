@@ -14,17 +14,17 @@ export const findDogs = () => {
             count: 500,
             offset: getState().findDogsReducer.lastOffset,
         };
-        
-        if(getState().settings.size !== 'any') {
+
+        if (getState().settings.size !== 'any') {
             cardDetails.size = getState().settings.size;
         }
-        if(getState().settings.gender !== 'either') {
+        if (getState().settings.gender !== 'either') {
             cardDetails.sex = getState().settings.gender;
         }
-        if(getState().settings.age !== 'any') {
+        if (getState().settings.age !== 'any') {
             cardDetails.age = getState().settings.age;
         }
-       
+
         let formBody = [];
         for (const property in cardDetails) { // eslint-disable-line
             const encodedKey = encodeURIComponent(property);
@@ -56,8 +56,14 @@ export const findDogs = () => {
                 return response;
             })
             .then((response) => {
-                return response.petfinder.pets.pet.filter((pet) => {   
-                    return pet.media.hasOwnProperty('photos');
+                return response.petfinder.pets.pet.filter((pet) => {
+                    const { gender, size, age, selectedBreeds } = getState().settings;
+                    return pet.media.hasOwnProperty('photos') &&
+                        (selectedBreeds > 248 || Object.values(pet.breeds.breed).filter(val => !selectedBreeds.includes(val)).length < 1) &&
+                        (gender === 'either' || !pet.sex.hasOwnProperty('$t') || pet.sex.$t === gender) &&
+                        (size === 'any' || !pet.size.hasOwnProperty('$t') || pet.size.$t === size) &&
+                        (age === 'any' || !pet.age.hasOwnProperty('$t') || pet.age.$t === age) &&
+                        (getState().dogs.blacklist.indexOf(pet.id.$t) === -1);
                 });
             })
             .then((response) => {
