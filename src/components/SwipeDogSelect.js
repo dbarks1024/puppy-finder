@@ -29,12 +29,13 @@ class SwipeDogSelect extends Component {
     }
 
     filterDogs() {
-        const { dogs, gender, selectedBreeds, blacklist, size } = this.props;
+        const { dogs, gender, selectedBreeds, blacklist, size, age } = this.props;
         return dogs.filter((pet) => {
             return blacklist.indexOf(pet.id.$t) === -1 &&
                 (selectedBreeds > 248 || Object.values(pet.breeds.breed).filter(val => !selectedBreeds.includes(val)).length < 1) &&
-                (gender === 'either' || pet.gender.$t === gender) &&
-                (size === 'any' || pet.size.$t === size);
+                (gender === 'either' || !pet.gender.hasOwnProperty('$t') || pet.gender.$t === gender) &&
+                (size === 'any' || !pet.size.hasOwnProperty('$t') || pet.size.$t === size) &&
+                (age === 'any' || !pet.age.hasOwnProperty('$t') || pet.age.$t === age);
         });
     }
 
@@ -159,7 +160,7 @@ const styles = {
 };
 
 const mapStateToProps = state => {
-    const { selectedBreeds, gender, size } = state.settings;
+    const { selectedBreeds, gender, size, age } = state.settings;
     const { dogs, findingDogs } = state.findDogsReducer;
     const { blacklist } = state.dogs;
     return { 
@@ -168,7 +169,8 @@ const mapStateToProps = state => {
         blacklist,
         selectedBreeds,
         gender,
-        size
+        size,
+        age
     };
 };
 

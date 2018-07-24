@@ -1,11 +1,12 @@
-import { UPDATE_BREEDS, ADD_ALL_BREEDS, CLEAR_BREEDS, CHANGE_SIZE, CHANGE_GENDER, CHANGE_LOCATION } from '../actions/types';
+import { UPDATE_BREEDS, ADD_ALL_BREEDS, CLEAR_BREEDS, CHANGE_SIZE, CHANGE_GENDER, CHANGE_LOCATION, CHANGE_AGE } from '../actions/types';
 import { allBreeds } from './breeds';
 
 const INITIAL_STATE = {
     selectedBreeds: allBreeds,
     size: 'any',
     gender: 'either',
-    location: '30189'
+    location: '30189',
+    age: 'any'
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -34,6 +35,8 @@ export default (state = INITIAL_STATE, action) => {
             return { ...state, gender: action.payload };
         case CHANGE_LOCATION: 
             return { ...state, location: action.payload };
+        case CHANGE_AGE: 
+            return { ...state, age: action.payload };    
         default:
             return state;
     }

@@ -11,3 +11,4 @@ export const LAST_OFFSET = 'last_offset';
 export const CHANGE_SIZE = 'change_size';
 export const CHANGE_GENDER = 'change_GENDER';
 export const CHANGE_LOCATION = 'change_location';
+export const CHANGE_AGE = 'change_age';
