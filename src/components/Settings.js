@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Actions } from 'react-native-router-flux';
-import { Container, Text, Content, Left, ListItem, Icon, Right, List } from 'native-base';
+import { Container, Text, Content, Left, ListItem, Icon, Right, List, View } from 'native-base';
 
 class Settings extends Component {
     render() {
@@ -49,7 +49,11 @@ class Settings extends Component {
                             </Right>
                         </ListItem>
                     </List>
+                   
                 </Content>
+                <View style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <Text style={{ fontSize: 20 }}>Powered by PetFinder</Text>
+                </View>
             </Container>
         );
     }
