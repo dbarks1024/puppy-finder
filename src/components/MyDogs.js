@@ -42,6 +42,7 @@ renderList() {
                     </ListItem>
                 );
             }}
+            ListEmptyComponent={() => <Text>You have no dogs</Text>}
             keyExtractor={item => item.id}
             />
         );
