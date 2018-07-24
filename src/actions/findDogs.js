@@ -14,11 +14,15 @@ export const findDogs = () => {
             count: 500,
             offset: getState().findDogsReducer.lastOffset,
         };
+        
         if(getState().settings.size !== 'any') {
             cardDetails.size = getState().settings.size;
         }
         if(getState().settings.gender !== 'either') {
             cardDetails.sex = getState().settings.gender;
+        }
+        if(getState().settings.age !== 'any') {
+            cardDetails.age = getState().settings.age;
         }
        
         let formBody = [];

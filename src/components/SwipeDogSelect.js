@@ -33,7 +33,7 @@ class SwipeDogSelect extends Component {
         return dogs.filter((pet) => {
             return blacklist.indexOf(pet.id.$t) === -1 &&
                 (selectedBreeds > 248 || Object.values(pet.breeds.breed).filter(val => !selectedBreeds.includes(val)).length < 1) &&
-                (gender === 'either' || !pet.gender.hasOwnProperty('$t') || pet.gender.$t === gender) &&
+                (gender === 'either' || !pet.sex.hasOwnProperty('$t') || pet.sex.$t === gender) &&
                 (size === 'any' || !pet.size.hasOwnProperty('$t') || pet.size.$t === size) &&
                 (age === 'any' || !pet.age.hasOwnProperty('$t') || pet.age.$t === age);
         });
