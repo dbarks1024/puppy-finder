@@ -1,3 +1,4 @@
+import { PETFINDER_API_KEY } from 'react-native-dotenv';
 import {
     FOUND_DOGS,
     FINDING_DOGS,
@@ -7,7 +8,7 @@ import {
 export const findDogs = () => {
     return (dispatch, getState) => {
         const cardDetails = {
-            key: '942708910a455c2a12f41399e343ffb3',
+            key: PETFINDER_API_KEY,
             location: getState().settings.location,
             format: 'json',
             animal: 'dog',
