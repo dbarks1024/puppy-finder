@@ -56,7 +56,10 @@ renderList() {
                       </View>
                     }
                     right={
-                      <Button danger onPress={() => console.log('Trash')}>
+                      <Button 
+                      danger 
+                      onPress={() => this.props.removeDog(item.id)}
+                      >
                         <Icon active name="trash" />
                       </Button>
                     }
