@@ -27,14 +27,13 @@ class ShowDog extends Component {
           <Header>
             <Left>
               <Button 
-              hasText 
+               
               transparent
               onPress={() => {
                 Actions.pop();
               }}
               >
-                <Icon name='arrow-back' />
-                <Text>My Dogs</Text>
+                <Icon name='arrow-back' />         
               </Button>
             </Left>
             <Body>
