@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Container, View, Text, Spinner, Button, Icon } from 'native-base';
 import Swiper from 'react-native-deck-swiper';
+import { Actions } from 'react-native-router-flux';
 import { findDogs, addDog, blacklistDog } from '../actions';
 import SwipeDogItem from './SwipeDogItem';
+import LocationModal from './settings/LocationModal';
 
 class SwipeDogSelect extends Component {
     componentWillMount() {
@@ -27,17 +29,6 @@ class SwipeDogSelect extends Component {
         }
         return breed.$t; 
     }
-
-    // filterDogs() {
-    //     const { dogs, gender, selectedBreeds, blacklist, size, age } = this.props;
-    //     return dogs.filter((pet) => {
-    //         return blacklist.indexOf(pet.id.$t) === -1 &&
-    //             (selectedBreeds > 248 || Object.values(pet.breeds.breed).filter(val => !selectedBreeds.includes(val)).length < 1) &&
-    //             (gender === 'either' || !pet.sex.hasOwnProperty('$t') || pet.sex.$t === gender) &&
-    //             (size === 'any' || !pet.size.hasOwnProperty('$t') || pet.size.$t === size) &&
-    //             (age === 'any' || !pet.age.hasOwnProperty('$t') || pet.age.$t === age);
-    //     });
-    // }
 
     renderDeckSwiper() {
         if (this.props.findingDogs || typeof this.props.dogs === 'string') {
@@ -75,10 +66,18 @@ class SwipeDogSelect extends Component {
         );
     }
     
+    renderLocationModal() {
+      if(this.props.location.length < 5 && Actions.currentScene === 'swipeDogSelect') {
+        return(
+          <LocationModal />
+        );
+      }
+    }
+    
     render() {
-        console.log(this.swiper);
         return (
             <Container>
+                {this.renderLocationModal()}
                 <View>
                     {this.renderDeckSwiper()}
                 </View>
@@ -160,7 +159,7 @@ const styles = {
 };
 
 const mapStateToProps = state => {
-    const { selectedBreeds, gender, size, age } = state.settings;
+    const { selectedBreeds, gender, size, age, location } = state.settings;
     const { dogs, findingDogs } = state.findDogsReducer;
     const { blacklist } = state.dogs;
     return { 
@@ -170,7 +169,8 @@ const mapStateToProps = state => {
         selectedBreeds,
         gender,
         size,
-        age
+        age,
+        location
     };
 };
 
