@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { FlatList } from 'react-native';
+import { FlatList, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
-import { Container, Text, Icon, Left, Right, ListItem, Thumbnail, Body, Content } from 'native-base';
+import { Container, Text, Icon, Left, Right, Thumbnail, Body, Content, SwipeRow, Button, View } from 'native-base';
 import { removeDog, addDog } from '../actions';
 
 class MyDogs extends Component {
@@ -22,24 +22,46 @@ renderList() {
             data={this.props.myDogs}
             renderItem={({ item }) => {
                 return (
-                    <ListItem 
-                    avatar
+                    <SwipeRow 
+                    disableRightSwipe
+                    leftOpenValue={75}
+                    rightOpenValue={-75}
                     onPress={() => this.onRowPress({ dog: item })}
-                    >
-                        <Left>
-                            <Thumbnail 
-                            source={{ uri: item.photos[1].$t }} 
-                            square
-                            />
-                        </Left>
-                        <Body>
-                            <Text>{item.name}</Text>
-                            <Text note>{item.breed}</Text>
-                        </Body>
-                        <Right>
-                            <Icon name='arrow-forward' />
-                        </Right>
-                    </ListItem>
+                    body={
+                      <View
+                      style={{ flex: 1, flexDirection: "row" }}
+                      >
+                        <TouchableOpacity
+                         onPress={() => this.onRowPress({ dog: item })}
+                         style={{ flex: 1, flexDirection: "row" }}
+                        >
+                          <Left
+                          style={{ paddingLeft: 10 }}
+                          >
+                              <Thumbnail 
+                              source={{ uri: item.photos[1].$t }} 
+                              square
+                              />
+                          </Left>
+                          <Body
+                          style={{ alignSelf: 'flex-start' }}
+                          >
+                              <Text>{item.name}</Text>
+                              <Text note>{item.breed}</Text>
+                          </Body>
+                          <Right>
+                              <Icon name='arrow-forward' />
+                          </Right>
+                        </TouchableOpacity>
+                      </View>
+                    }
+                    right={
+                      <Button danger onPress={() => console.log('Trash')}>
+                        <Icon active name="trash" />
+                      </Button>
+                    }
+                    />
+                    
                 );
             }}
             ListEmptyComponent={() => <Text>You have no dogs</Text>}
