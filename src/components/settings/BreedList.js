@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { FlatList } from 'react-native';
 import { connect } from 'react-redux';
-import { Container, Content, Button, Text } from 'native-base';
+import { Container, Content, Button, Text, View } from 'native-base';
 import BreedListItem from './BreedListItem';
 import { addAllBreeds, clearAllBreeds } from '../../actions';
 
@@ -10,12 +10,16 @@ class BreedList extends Component {
         return (    
             <Container>
                 <Content>
-                    <Button
-                    onPress={() => this.props.addAllBreeds()}
-                    ><Text>Select All</Text></Button>
-                    <Button
-                    onPress={() => this.props.clearAllBreeds()}
-                    ><Text>Clear All</Text></Button>
+                    <View
+                    style={{ flexDirection: 'row', justifyContent: 'space-around' }}
+                    >
+                        <Button
+                        onPress={() => this.props.addAllBreeds()}
+                        ><Text>Select All</Text></Button>
+                        <Button
+                        onPress={() => this.props.clearAllBreeds()}
+                        ><Text>Clear All</Text></Button>
+                    </View>
                     <FlatList 
                     extraData={this.props.selectedBreeds}
                     data={this.props.breeds}
