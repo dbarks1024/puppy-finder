@@ -15,7 +15,7 @@ import rootReducer from '../reducers/index';
 const persistConfig = {
     key: 'root',
     storage,
-    stateReconciler: autoMergeLevel2, // see "Merge Process" section for details.
+    stateReconciler: autoMergeLevel2,
     blacklist: ['findDogsReducer']
 };
 

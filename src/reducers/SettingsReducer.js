@@ -24,7 +24,7 @@ export default (state = INITIAL_STATE, action) => {
         case ADD_ALL_BREEDS:
         console.log(action);
             return { ...state,
-                selectedBreeds: action.payload
+                selectedBreeds: allBreeds
             };
         case CLEAR_BREEDS:
             return { ...state,
