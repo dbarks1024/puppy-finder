@@ -6,6 +6,12 @@ import BreedListItem from './BreedListItem';
 import { addAllBreeds, clearAllBreeds, searchBreeds } from '../../actions';
 
 class BreedList extends Component {
+    filterList(breeds) {
+        return breeds.filter((breed) => {
+            return breed.$t.search(this.props.searchBreedsKeyword) !== -1;
+        });
+    }
+
     render() {
         return (    
             <Container>
@@ -29,7 +35,7 @@ class BreedList extends Component {
                     </Item>
                     <FlatList 
                     extraData={this.props.selectedBreeds}
-                    data={this.props.breeds}
+                    data={this.filterList(this.props.breeds)}
                     renderItem={({ item }) => <BreedListItem breed={item.$t} />}
                     keyExtractor={item => item.$t}
                     />
@@ -42,7 +48,8 @@ class BreedList extends Component {
 const mapStateToProps = (state) => {
     return {
         breeds: state.breeds.breed,
-        selectedBreeds: state.settings.selectedBreeds
+        selectedBreeds: state.settings.selectedBreeds,
+        searchBreedsKeyword: state.settings.searchBreeds,
     };
 };
 
