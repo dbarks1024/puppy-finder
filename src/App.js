@@ -1,13 +1,29 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
+import { Text } from 'native-base';
+import { persistStore } from 'redux-persist';
 import Router from './Router';
-import { store, persistor } from './store/index';
+import { store } from './store/index';
 
 class App extends Component {   
+    constructor() {
+      super();
+      this.state = { rehydrated: false };
+    }
+
+    componentWillMount() {
+      persistStore(store, {}, () => {
+        this.setState({ rehydrated: true });
+      });
+    }
     render() {
-      //  const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
+        if(!this.state.rehydrated) {
+          return (
+          <Text>Loading</Text>
+          );
+        }
         return (
-        <Provider store={store} persistor={persistor}>
+        <Provider store={store}>
             <Router />
         </Provider>
         );
