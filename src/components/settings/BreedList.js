@@ -31,6 +31,7 @@ class BreedList extends Component {
                       <Input 
                       placeholder="Search"
                       onChangeText={(text) => this.props.searchBreeds(text)}
+                      value={this.props.searchBreedsKeyword}
                       />
                     </Item>
                     <FlatList 
