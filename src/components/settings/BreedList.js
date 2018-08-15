@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { FlatList } from 'react-native';
 import { connect } from 'react-redux';
-import { Container, Content, Button, Text, View } from 'native-base';
+import { Container, Content, Button, Text, View, Item, Input, Icon } from 'native-base';
 import BreedListItem from './BreedListItem';
-import { addAllBreeds, clearAllBreeds } from '../../actions';
+import { addAllBreeds, clearAllBreeds, searchBreeds } from '../../actions';
 
 class BreedList extends Component {
     render() {
@@ -20,6 +20,13 @@ class BreedList extends Component {
                         onPress={() => this.props.clearAllBreeds()}
                         ><Text>Clear All</Text></Button>
                     </View>
+                    <Item>
+                      <Icon name="ios-search" />
+                      <Input 
+                      placeholder="Search"
+                      onChangeText={(text) => this.props.searchBreeds(text)}
+                      />
+                    </Item>
                     <FlatList 
                     extraData={this.props.selectedBreeds}
                     data={this.props.breeds}
@@ -39,4 +46,4 @@ const mapStateToProps = (state) => {
     };
 };
 
-export default connect(mapStateToProps, { addAllBreeds, clearAllBreeds })(BreedList);
+export default connect(mapStateToProps, { addAllBreeds, clearAllBreeds, searchBreeds })(BreedList);

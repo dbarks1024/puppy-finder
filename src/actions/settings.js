@@ -1,4 +1,4 @@
-import { UPDATE_BREEDS, ADD_ALL_BREEDS, CLEAR_BREEDS, CHANGE_SIZE, CHANGE_GENDER, CHANGE_LOCATION, CHANGE_AGE } from './types';
+import { UPDATE_BREEDS, ADD_ALL_BREEDS, CLEAR_BREEDS, CHANGE_SIZE, CHANGE_GENDER, CHANGE_LOCATION, CHANGE_AGE, SEARCH_BREEDS } from './types';
 
 export const updateBreeds = (breedName) => {
     return {
@@ -26,6 +26,13 @@ export const clearAllBreeds = () => {
         type: CLEAR_BREEDS,
         payload: []
     };
+};
+
+export const searchBreeds = (keyword) => {
+  return {
+      type: SEARCH_BREEDS,
+      payload: keyword
+  };
 };
 
 export const changeSize = (size) => {
