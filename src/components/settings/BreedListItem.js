@@ -5,6 +5,9 @@ import { updateBreeds } from '../../actions';
 
 class BreedListItem extends Component {
     isChecked(breedArray, breedName) {
+        if (breedArray.length === 249) {
+          return true;
+        }
         if (breedArray.indexOf(breedName) === -1) {
             return false;
         } 
@@ -13,7 +16,6 @@ class BreedListItem extends Component {
 
     render() {
         const breedName = this.props.breed;
-
         return (
             <ListItem>
                 <CheckBox 

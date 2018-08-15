@@ -6,7 +6,7 @@ const INITIAL_STATE = {
     searchBreeds: '',
     size: 'any',
     gender: 'either',
-    location: '30189',
+    location: '',
     age: 'any'
 };
 
