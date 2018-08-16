@@ -26,6 +26,10 @@ export const findDogs = () => {
         if (getState().settings.age !== 'any') {
             cardDetails.age = getState().settings.age;
         }
+        const breeds = getState().settings.selectedBreeds;
+        if(breeds.length === 1) {
+          cardDetails.breed = breeds;
+        }
 
         let formBody = [];
         for (const property in cardDetails) { // eslint-disable-line
