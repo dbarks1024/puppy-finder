@@ -52,10 +52,6 @@ export const findDogs = () => {
             .then((response) => response.json())
             .then((response) => {
               if(Number(response.petfinder.header.status.code.$t) !== 100) {
-                dispatch({
-                  type: ERROR,
-                  payload: response.petfinder.header.status.message.$t
-                });
                 console.log(response);
                 throw response.petfinder.header.status.message.$t;
               }
@@ -94,6 +90,17 @@ export const findDogs = () => {
             })
             .catch((error) => {
                 console.log(`find dog error: ${error}`);
+                if(error === 'number of results would exceed per-search limit') {
+                  dispatch({
+                    type: ERROR,
+                    payload: 'Please change filters, there are no found dogs like this in your area.'
+                  }); 
+                } else {
+                  dispatch({
+                    type: ERROR,
+                    payload: error
+                  });
+                }
                 dispatch({
                     type: FOUND_DOGS,
                     payload: []
