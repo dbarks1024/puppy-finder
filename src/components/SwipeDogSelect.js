@@ -12,12 +12,24 @@ class SwipeDogSelect extends Component {
         this.props.findDogs();   
     }
 
+    componentWillReceiveProps(nextProps) {
+      if(nextProps.location.length === 5 &&
+        (nextProps.selectedBreeds !== this.props.selectedBreeds || 
+        nextProps.gender !== this.props.gender ||
+        nextProps.size !== this.props.size ||
+        nextProps.age !== this.props.age ||
+        nextProps.location !== this.props.location)) {
+          this.props.findDogs();
+        }
+    }
+
     shouldComponentUpdate(nextProps) {
         if(nextProps.blacklist !== this.props.blacklist) {
             return false;
         } 
         return true;
     }
+
    
     dogBreedString(breed) {
         if (Array.isArray(breed)) {
@@ -33,9 +45,13 @@ class SwipeDogSelect extends Component {
     renderDeckSwiper() {
         if (this.props.findingDogs || typeof this.props.dogs === 'string') {
             return (<Spinner color='black' />);
+        } else if(this.props.error) {
+          return (
+            <Text>{this.props.error}</Text> 
+          );
         } else if (this.props.dogs === undefined) {
             return (
-                <Text>No dogs found.</Text>
+                <Text>No dogs found. Try changing your refreshing or changing your settings.</Text>
             );   
         } 
         return (
@@ -54,14 +70,11 @@ class SwipeDogSelect extends Component {
                     />
                 );
             }}
-            // renderEmpty={() => {
-            //     return (<Text>No dogs found. Try less filters or refreshing.</Text>);
-            // }}
             onSwipedRight={(index) => this.props.addDog(this.swiper.state.cards[index])}
             onSwipedLeft={(index) => this.props.blacklistDog(this.swiper.state.cards[index].id.$t)}
             disableBottomSwipe	
             disableTopSwipe
-            //loop={false}
+            loop={false}
             />
         );
     }
@@ -160,7 +173,7 @@ const styles = {
 
 const mapStateToProps = state => {
     const { selectedBreeds, gender, size, age, location } = state.settings;
-    const { dogs, findingDogs } = state.findDogsReducer;
+    const { dogs, findingDogs, error } = state.findDogsReducer;
     const { blacklist } = state.dogs;
     return { 
         dogs,
@@ -170,7 +183,8 @@ const mapStateToProps = state => {
         gender,
         size,
         age,
-        location
+        location,
+        error
     };
 };
 

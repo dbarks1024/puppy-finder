@@ -1,9 +1,10 @@
-import { FOUND_DOGS, FINDING_DOGS, SHOW_DOG, LAST_OFFSET } from '../actions/types';
+import { FOUND_DOGS, FINDING_DOGS, SHOW_DOG, LAST_OFFSET, ERROR } from '../actions/types';
 
 const INITIAL_STATE = {
     dogs: [],
     findingDogs: true,
-    lastOffset: 0
+    lastOffset: 0,
+    error: '',
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -21,6 +22,8 @@ export default (state = INITIAL_STATE, action) => {
             return state;
         case LAST_OFFSET:
             return { ...state, lastOffset: action.payload };
+        case ERROR:
+            return { ...state, error: action.payload };
         default:
             return state;
     }

@@ -2,7 +2,8 @@ import { PETFINDER_API_KEY } from 'react-native-dotenv';
 import {
     FOUND_DOGS,
     FINDING_DOGS,
-    LAST_OFFSET
+    LAST_OFFSET,
+    ERROR
 } from './types';
 
 export const findDogs = () => {
@@ -46,8 +47,20 @@ export const findDogs = () => {
             type: FINDING_DOGS,
             payload: true
         });
+        console.log(options);
         fetch('http://api.petfinder.com/pet.find', options) // eslint-disable-line no-undef
             .then((response) => response.json())
+            .then((response) => {
+              if(Number(response.petfinder.header.status.code.$t) !== 100) {
+                dispatch({
+                  type: ERROR,
+                  payload: response.petfinder.header.status.message.$t
+                });
+                console.log(response);
+                throw response.petfinder.header.status.message.$t;
+              }
+              return response;
+            })
             .then((response) => {
                 console.log(response);
                 dispatch({
@@ -83,7 +96,7 @@ export const findDogs = () => {
                 console.log(`find dog error: ${error}`);
                 dispatch({
                     type: FOUND_DOGS,
-                    payload: undefined
+                    payload: []
                 });
                 dispatch({
                     type: FINDING_DOGS,
