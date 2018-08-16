@@ -11,37 +11,37 @@ const INITIAL_STATE = {
 };
 
 export default (state = INITIAL_STATE, action) => {
-    switch (action.type) {
-        case UPDATE_BREEDS:
-            if (state.selectedBreeds.indexOf(action.payload) === -1) {
-                state.selectedBreeds.push(action.payload); 
-            } else {
-                state.selectedBreeds.splice(state.selectedBreeds.indexOf(action.payload), 1);
-            }
-            return { ...state,
-                selectedBreeds: state.selectedBreeds
-            };
-        case ADD_ALL_BREEDS:
-        console.log(action);
-            return { ...state,
-                selectedBreeds: allBreeds
-            };
-        case CLEAR_BREEDS:
-            return { ...state,
-                selectedBreeds: []
-            };
-        case SEARCH_BREEDS:
-            return { ...state, searchBreeds: action.payload };
-        case CHANGE_SIZE:
-            return { ...state, size: action.payload };
-        case CHANGE_GENDER: 
-            return { ...state, gender: action.payload };
-        case CHANGE_LOCATION: 
-            return { ...state, location: action.payload };
-        case CHANGE_AGE: 
-            return { ...state, age: action.payload };    
-        default:
-            return state;
-    }
+  switch (action.type) {
+    case UPDATE_BREEDS:
+      if (state.selectedBreeds.indexOf(action.payload) === -1) {
+          state.selectedBreeds.push(action.payload); 
+      } else {
+          state.selectedBreeds.splice(state.selectedBreeds.indexOf(action.payload), 1);
+      }
+      return { ...state,
+          selectedBreeds: state.selectedBreeds
+      };
+    case ADD_ALL_BREEDS:
+      console.log(action);
+      return { ...state,
+          selectedBreeds: allBreeds
+      };
+    case CLEAR_BREEDS:
+      return { ...state,
+          selectedBreeds: []
+      };
+    case SEARCH_BREEDS:
+      return { ...state, searchBreeds: action.payload };
+    case CHANGE_SIZE:
+      return { ...state, size: action.payload };
+    case CHANGE_GENDER: 
+      return { ...state, gender: action.payload };
+    case CHANGE_LOCATION: 
+      return { ...state, location: action.payload };
+    case CHANGE_AGE: 
+      return { ...state, age: action.payload };    
+    default:
+      return state;
+  }
 };
 
