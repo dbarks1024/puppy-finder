@@ -26,10 +26,6 @@ export const findDogs = () => {
         if (getState().settings.age !== 'any') {
             cardDetails.age = getState().settings.age;
         }
-        const breeds = getState().settings.selectedBreeds;
-        if(breeds.length === 1) {
-          cardDetails.breed = breeds;
-        }
 
         let formBody = [];
         for (const property in cardDetails) { // eslint-disable-line
@@ -71,9 +67,8 @@ export const findDogs = () => {
             })
             .then((response) => {
                 return response.petfinder.pets.pet.filter((pet) => {
-                    const { gender, size, age, selectedBreeds } = getState().settings;
+                    const { gender, size, age } = getState().settings;
                     return pet.media.hasOwnProperty('photos') &&
-                        (selectedBreeds > 248 || Object.values(pet.breeds.breed).filter(val => !selectedBreeds.includes(val)).length < 1) &&
                         (gender === 'either' || !pet.sex.hasOwnProperty('$t') || pet.sex.$t === gender) &&
                         (size === 'any' || !pet.size.hasOwnProperty('$t') || pet.size.$t === size) &&
                         (age === 'any' || !pet.age.hasOwnProperty('$t') || pet.age.$t === age) &&

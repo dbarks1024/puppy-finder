@@ -8,14 +8,6 @@ class Settings extends Component {
             <Container>
                 <Content>
                     <List >
-                        <ListItem button onPress={() => Actions.breedList()}>
-                            <Left>
-                                <Text>Breeds</Text>
-                            </Left>
-                            <Right>
-                                <Icon name="arrow-forward" />
-                            </Right>
-                        </ListItem>
                         <ListItem button onPress={() => Actions.dogSize()}>
                             <Left>
                                 <Text>Size</Text>

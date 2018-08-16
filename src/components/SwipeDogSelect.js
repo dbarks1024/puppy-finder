@@ -14,8 +14,7 @@ class SwipeDogSelect extends Component {
 
     componentWillReceiveProps(nextProps) {
       if(nextProps.location.length === 5 &&
-        (nextProps.selectedBreeds !== this.props.selectedBreeds || 
-        nextProps.gender !== this.props.gender ||
+        (nextProps.gender !== this.props.gender ||
         nextProps.size !== this.props.size ||
         nextProps.age !== this.props.age ||
         nextProps.location !== this.props.location)) {

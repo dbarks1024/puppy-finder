@@ -4,7 +4,6 @@ import { Scene, Router } from 'react-native-router-flux';
 import { Icon } from 'native-base';
 import SwipeDogSelect from './components/SwipeDogSelect';
 import Settings from './components/Settings';
-import BreedList from './components/settings/BreedList';
 import MyDogs from './components/MyDogs';
 import ShowDog from './components/ShowDog';
 import DogSize from './components/settings/DogSize';
@@ -56,11 +55,6 @@ const RouterComponent = () => {
                       title='Settings'
                       initial
                       />
-                      <Scene 
-                      key='breedList'
-                      component={BreedList}
-                      title='Breeds'
-                      />  
                       <Scene 
                       key='dogSize'
                       component={DogSize}
