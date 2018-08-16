@@ -20,6 +20,9 @@ export default (state = INITIAL_STATE, action) => {
     case SHOW_DOG:
       return state;
     case LAST_OFFSET:
+      if(Number(action.payload) === 2000) {
+        return { ...state, lastOffset: "0" };
+      }
       return { ...state, lastOffset: action.payload };
     case ERROR:
       return { ...state, error: action.payload };
