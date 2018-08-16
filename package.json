@@ -4,24 +4,31 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
+    "run-ios": "react-native run-ios",
     "test": "jest"
   },
   "dependencies": {
     "dotenv": "^6.0.0",
     "eslint-config-rallycoding": "^3.2.0",
-    "native-base": "^2.7.1",
+    "native-base": "^2.7.2",
     "react": "16.4.1",
     "react-native": "0.56.0",
+    "react-native-deck-swiper": "^1.5.17",
+    "react-native-dotenv": "^0.2.0",
+    "react-native-modal": "^6.5.0",
     "react-native-router-flux": "^4.0.0-beta.31",
+    "react-native-vector-icons": "^5.0.0",
     "react-redux": "^5.0.7",
     "redux": "^4.0.0",
+    "redux-persist": "^5.10.0",
     "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
     "babel-jest": "23.4.0",
     "babel-preset-react-native": "^5.0.2",
     "jest": "23.4.1",
-    "react-test-renderer": "16.4.1"
+    "react-test-renderer": "16.4.1",
+    "redux-devtools-extension": "^2.13.5"
   },
   "jest": {
     "preset": "react-native"
