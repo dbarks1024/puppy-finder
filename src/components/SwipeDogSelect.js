@@ -50,10 +50,14 @@ class SwipeDogSelect extends Component {
             <Text>{this.props.error}</Text> 
           );
         } else if (this.props.dogs === undefined) {
-            return (
-                <Text>No dogs found. Try changing your refreshing or changing your settings.</Text>
-            );   
-        } 
+          return (
+              <Text>No dogs found. Try changing your refreshing or changing your settings.</Text>
+          );   
+        } else if (Number(this.props.selectedBreeds).length === 0) {
+          return (
+            <Text>You don't have any breeds selected.</Text>
+          );
+        }
         return (
             <Swiper 
             cardStyle={styles.swiperCardStyles}
